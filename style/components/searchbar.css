@@ -1,11 +1,8 @@
-.searchbar {
-  position: relative;
-}
-
-.searchbar__container:after {
+.searchbar:after {
   content: url("../../asset/search.svg");
   position: absolute;
   transform: translate(-100%, 50%);
+  padding-right: 23px;
 }
 
 .searchbar__input {
@@ -14,6 +11,7 @@
   background-color: var(--color-light-gray);
   border: none;
   border-radius: 5px;
+  padding: 23px;
 }
 
 .searchbar__input::placeholder {

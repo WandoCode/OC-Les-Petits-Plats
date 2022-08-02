@@ -2,7 +2,8 @@ h1 {
   font-family: "DM Sans", sans-serif;
 }
 
-body {
+body,
+input {
   font-family: "Lato", sans-serif;
 }
 
