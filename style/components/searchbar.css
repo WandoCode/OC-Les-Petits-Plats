@@ -1,0 +1,23 @@
+.searchbar {
+  position: relative;
+}
+
+.searchbar__container:after {
+  content: url("../../asset/search.svg");
+  position: absolute;
+  transform: translate(-100%, 50%);
+}
+
+.searchbar__input {
+  width: 100%;
+  height: 69px;
+  background-color: var(--color-light-gray);
+  border: none;
+  border-radius: 5px;
+}
+
+.searchbar__input::placeholder {
+  font-size: 18px;
+  color: black;
+  opacity: 25%;
+}
