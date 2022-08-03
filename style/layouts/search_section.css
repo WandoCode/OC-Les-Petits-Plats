@@ -7,3 +7,8 @@
   flex-wrap: wrap;
   gap: 0 5px;
 }
+
+.dropdown-menus {
+  display: flex;
+  gap: 20px;
+}
