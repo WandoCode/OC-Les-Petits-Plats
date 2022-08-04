@@ -2,13 +2,18 @@
   position: relative;
 }
 
+.searchbar {
+  margin: 20px 0 5px;
+}
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0 5px;
+  margin-top: 20px;
 }
 
 .dropdown-menus {
   display: flex;
   gap: 20px;
+  margin: 15px 0 25px 0;
 }
