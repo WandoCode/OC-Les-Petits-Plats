@@ -1,7 +1,49 @@
 .receipe {
   height: 365px;
   width: 380px;
+  background-color: var(--color-light-gray);
+  border-radius: 5px;
 }
 
 .receipe__details {
+  display: flex;
+  font-size: 12px;
+  padding: 0 20px;
+}
+
+.receipe__split-details {
+  flex-basis: 50%;
+}
+
+.receipe__title {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 20px 0;
+}
+
+.receipe__time {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  padding: 20px 0;
+}
+.receipe__time img {
+  margin-right: 7px;
+}
+.receipe__ingredient {
+  font-weight: 700;
+}
+.receipe__ingredients {
+  height: 105px;
+  overflow: hidden;
+}
+
+.receipe__short {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  height: 100px;
+  overflow: hidden;
 }
