@@ -1,0 +1,11 @@
+.color-primary {
+  background-color: var(--color-primary);
+}
+
+.color-secondary {
+  background-color: var(--color-secondary);
+}
+
+.color-tertiary {
+  background-color: var(--color-tertiary);
+}

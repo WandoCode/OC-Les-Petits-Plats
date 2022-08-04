@@ -1,18 +1,18 @@
 .dropdown-menu {
+  position: relative;
   height: 69px;
   width: 170px;
-  position: relative;
 }
 
 .dropdown-menu__input {
   height: 100%;
+  width: 100%;
   border: none;
+  border-radius: 5px;
+  padding: 0 19px;
   font-weight: 700;
   font-size: 18px;
   color: white;
-  padding: 0 19px;
-  border-radius: 5px;
-  width: 100%;
 }
 
 .dropdown-menu__input::placeholder {
@@ -21,22 +21,13 @@
 .dropdown-menu__input:focus {
   outline: none;
 }
-.dropdown-menu:nth-child(1) .dropdown-menu__input {
-  background-color: var(--color-secondary);
-}
-.dropdown-menu:nth-child(2) .dropdown-menu__input {
-  background-color: var(--color-tertiary);
-}
-.dropdown-menu:nth-child(3) .dropdown-menu__input {
-  background-color: var(--color-primary);
-}
 
 .dropdown-menu__icon {
   position: absolute;
-  height: 10px;
-  width: 16px;
   top: 40%;
   right: 0;
+  height: 10px;
+  width: 16px;
   margin-right: 18px;
   transform: rotate(180deg) translate(0, -50%);
 }
@@ -50,19 +41,17 @@
   position: absolute;
   top: 100%;
   left: 0;
-  color: white;
-  font-size: 18px;
-  margin-top: -19px;
-  z-index: 1;
   width: 100%;
-  background-color: aliceblue;
+  margin-top: -19px;
+  font-size: 18px;
+  color: white;
+  z-index: 1;
 }
 
 /* Bug flex box: ul n'adapte pas sa largeur avec flex wrap. Ajout du container pour contourner le bug */
 .item-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--color-secondary);
   border-radius: 0 0 5px 5px;
 }
 
@@ -71,14 +60,14 @@
 }
 
 .dropdown-menu__menu li {
-  padding: 10px 19px;
   width: 170px;
+  padding: 10px 19px;
 }
 
 .dropdown-menu--expanded {
   width: 510px;
 }
-
+/* TODO: (mentor) Sass autorisé?  */
 /* TODO: Associer les différentes classes avec le JS (normal ou "expanded") */
 /* TODO: Ajouter les interraction avec l'input et le chevron apd JS */
 /* TODO: Adapter le placeholder avec JS quand le menu est expanded */
