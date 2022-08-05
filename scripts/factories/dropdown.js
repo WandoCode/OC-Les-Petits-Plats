@@ -36,9 +36,27 @@ const dropdownsFactory = (recipes) => {
     return Array.from(ustensilsSet);
   };
 
-  const getIngredientsDropdownDOM = () => {};
+  /* Return list element to fill dropdown menus. 'type' give the menu focused */
+  const getDropdownListDOM = (type) => {
+    let ElementsArray;
 
-  return { getIngredientsArray, getUstensilsArray, getAppliancesArray };
+    if (type === "ingredients") ElementsArray = getIngredientsArray();
+    if (type === "ustensils") ElementsArray = getUstensilsArray();
+    if (type === "appliances") ElementsArray = getAppliancesArray();
+
+    const elementsList = [];
+
+    ElementsArray.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      elementsList.push(li);
+    });
+
+    return elementsList;
+  };
+
+  return { getDropdownListDOM };
 };
 
 export { dropdownsFactory };
+//TODO: Mettre ce fichier dans /utils??

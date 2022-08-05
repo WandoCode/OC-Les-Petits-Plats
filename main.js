@@ -1,5 +1,4 @@
-import { initSearchPage } from "./scripts/pages/index.js";
-
+import { dropdownsFactory } from "./scripts/factories/dropdown.js";
 /* TEST */
 const recipesTest = [
   {
@@ -121,5 +120,16 @@ const recipesTest = [
   },
 ];
 
-initSearchPage(recipesTest);
+const dropdownModel = dropdownsFactory(recipesTest);
+const ingredientsList = dropdownModel.getDropdownListDOM("ingredients");
+const ustensilsList = dropdownModel.getDropdownListDOM("ustensils");
+const appliancesList = dropdownModel.getDropdownListDOM("appliances");
+const ingredientsMenu = document.getElementById("ingredient-menu");
+const ustensilsMenu = document.getElementById("ustensil-menu");
+const appliancesMenu = document.getElementById("appareil-menu");
+ingredientsMenu.append(...ingredientsList);
+console.log(ustensilsList);
+ustensilsMenu.append(...ustensilsList);
+appliancesMenu.append(...appliancesList);
+
 /* FIN TEST */
