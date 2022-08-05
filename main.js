@@ -123,5 +123,5 @@ const recipesTest = [
 
 const dropdownsModel = dropdownsFactory(recipesTest);
 
-console.log(dropdownsModel.getUstensilsArray());
+console.log(dropdownsModel.getAppliancesArray());
 /* FIN TEST */

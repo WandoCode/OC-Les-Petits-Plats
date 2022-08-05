@@ -15,14 +15,13 @@ const dropdownsFactory = (recipes) => {
 
   /* Return arrays with appliances present in the recipes */
   const getAppliancesArray = () => {
-    let ingredientsSet = new Set();
+    let appliancesSet = new Set();
     recipes.forEach((recipe) => {
-      const ingredients = recipe.ingredients;
-      ingredients.forEach((ingredient) => {
-        ingredientsSet.add(ingredient.ingredient.toLowerCase());
-      });
+      const appliance = recipe.appliance;
+      appliancesSet.add(appliance.toLowerCase());
     });
-    return Array.from(ingredientsSet);
+
+    return Array.from(appliancesSet);
   };
 
   /* Return arrays with ustensils present in the recipes */
@@ -39,7 +38,7 @@ const dropdownsFactory = (recipes) => {
 
   const getIngredientsDropdownDOM = () => {};
 
-  return { getIngredientsArray, getUstensilsArray };
+  return { getIngredientsArray, getUstensilsArray, getAppliancesArray };
 };
 
 export { dropdownsFactory };
