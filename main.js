@@ -1,4 +1,4 @@
-import { dropdownsFactory } from "./scripts/factories/dropdown.js";
+import { initSearchPage } from "./scripts/pages/index.js";
 
 /* TEST */
 const recipesTest = [
@@ -121,7 +121,5 @@ const recipesTest = [
   },
 ];
 
-const dropdownsModel = dropdownsFactory(recipesTest);
-
-console.log(dropdownsModel.getAppliancesArray());
+initSearchPage(recipesTest);
 /* FIN TEST */

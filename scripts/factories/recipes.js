@@ -68,7 +68,7 @@ const recipeFactory = (recipeDatas) => {
     return anchor;
   };
 
-  /* Fill the ingredients list */
+  /* Fill the ingredients list in recipe card */
   const createIngredientsListDOM = (ingredientsList) => {
     ingredients.forEach((item) => {
       const itemUnit = item.unit ? item.unit : "";
