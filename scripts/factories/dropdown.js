@@ -2,47 +2,53 @@ const dropdownsFactory = (recipes) => {
   /* recipes is an array */
 
   /* Return arrays with ingredients present in the recipes */
-  const getIngredientsArray = () => {
+  const getIngredientsArray = (filter) => {
     let ingredientsSet = new Set();
     recipes.forEach((recipe) => {
       const ingredients = recipe.ingredients;
       ingredients.forEach((ingredient) => {
-        ingredientsSet.add(ingredient.ingredient.toLowerCase());
+        const item = ingredient.ingredient.toLowerCase();
+        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
+        if (addItem) ingredientsSet.add(item);
       });
     });
     return Array.from(ingredientsSet);
   };
 
   /* Return arrays with appliances present in the recipes */
-  const getAppliancesArray = () => {
+  const getAppliancesArray = (filter) => {
     let appliancesSet = new Set();
     recipes.forEach((recipe) => {
-      const appliance = recipe.appliance;
-      appliancesSet.add(appliance.toLowerCase());
+      const item = recipe.appliance.toLowerCase();
+      const addItem = filter ? item.includes(filter.toLowerCase()) : true;
+      if (addItem) appliancesSet.add(item);
     });
 
     return Array.from(appliancesSet);
   };
 
   /* Return arrays with ustensils present in the recipes */
-  const getUstensilsArray = () => {
+  const getUstensilsArray = (filter) => {
     let ustensilsSet = new Set();
     recipes.forEach((recipe) => {
       const ustensils = recipe.ustensils;
       ustensils.forEach((ustensil) => {
-        ustensilsSet.add(ustensil.toLowerCase());
+        const item = ustensil.toLowerCase();
+        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
+        if (addItem) ustensilsSet.add(item);
       });
     });
     return Array.from(ustensilsSet);
   };
 
-  /* Return list element to fill dropdown menus. 'type' give the menu focused */
-  const getDropdownListDOM = (type) => {
+  /* Return list element to fill dropdown menus. 'type' give the focused menu  */
+  const getDropdownListDOM = (type, filter) => {
+    //TODO: ajouter un autre argument pour filtrer encore plus en fct des caractères entré dans le input (à répercuter dans les fct get****array())
     let ElementsArray;
 
-    if (type === "ingredients") ElementsArray = getIngredientsArray();
-    if (type === "ustensils") ElementsArray = getUstensilsArray();
-    if (type === "appliances") ElementsArray = getAppliancesArray();
+    if (type === "ingredients") ElementsArray = getIngredientsArray(filter);
+    if (type === "ustensils") ElementsArray = getUstensilsArray(filter);
+    if (type === "appliances") ElementsArray = getAppliancesArray(filter);
 
     const elementsList = [];
 
@@ -59,4 +65,3 @@ const dropdownsFactory = (recipes) => {
 };
 
 export { dropdownsFactory };
-//TODO: Mettre ce fichier dans /utils??
