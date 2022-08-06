@@ -1,5 +1,5 @@
 import { dropdownsFactory } from "./scripts/factories/dropdown.js";
-import { initDropdowns } from "./scripts/utils/dropdown.js";
+import { initDropdowns } from "./scripts/utils/dropdown/main.js";
 /* TEST */
 const recipesTest = [
   {
