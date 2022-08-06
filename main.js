@@ -122,9 +122,9 @@ const recipesTest = [
 ];
 
 const dropdownModel = dropdownsFactory(recipesTest);
-const ingredientsList = dropdownModel.getDropdownListDOM("ingredients", "c");
-const ustensilsList = dropdownModel.getDropdownListDOM("ustensils", "P");
-const appliancesList = dropdownModel.getDropdownListDOM("appliances", "Sa");
+const ingredientsList = dropdownModel.getDropdownListDOM("ingredients", "");
+const ustensilsList = dropdownModel.getDropdownListDOM("ustensils", "");
+const appliancesList = dropdownModel.getDropdownListDOM("appliances", "");
 const ingredientsMenu = document.getElementById("ingredient-menu");
 const ustensilsMenu = document.getElementById("ustensil-menu");
 const appliancesMenu = document.getElementById("appareil-menu");
