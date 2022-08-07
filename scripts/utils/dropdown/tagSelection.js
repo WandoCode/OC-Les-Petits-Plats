@@ -7,14 +7,18 @@ const handleTagSelectionInMenu = () => {
     itemsContainer.addEventListener("click", (e) => {
       if (e.target.tagName === "LI") {
         const value = e.target.innerText;
-        handleAddTag(value);
+        const tagColorClasses = Array.from(e.target.parentNode.classList);
+        const tagColorClass = tagColorClasses.find((item) => {
+          return item.includes("color");
+        });
+        handleAddTag(value, tagColorClass);
       }
     });
   });
 };
 
 /* Check if the tag can be added to tag field */
-const handleAddTag = (value) => {
+const handleAddTag = (value, tagColorClass) => {
   const tags = document.querySelectorAll(".tag");
   const currentTagsValues = Array.from(tags).map((tag) => {
     return tag.firstElementChild.innerText;
@@ -22,7 +26,7 @@ const handleAddTag = (value) => {
 
   if (!currentTagsValues.includes(value)) {
     const tagsContainer = document.querySelector(".tags");
-    const tagModel = tagFactory(value);
+    const tagModel = tagFactory(value, tagColorClass);
     const tagNode = tagModel.createTagDOM();
     tagsContainer.append(tagNode);
   }
