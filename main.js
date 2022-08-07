@@ -3,18 +3,6 @@ import { initDropdowns } from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
 /* TEST */
 
-const dropdownModel = dropdownsFactory(recipes);
-const ingredientsList = dropdownModel.getDropdownListDOM("ingredients", "");
-const ustensilsList = dropdownModel.getDropdownListDOM("ustensils", "");
-const appliancesList = dropdownModel.getDropdownListDOM("appliances", "");
-
-const ingredientsMenu = document.getElementById("ingredient-menu");
-const ustensilsMenu = document.getElementById("ustensil-menu");
-const appliancesMenu = document.getElementById("appareil-menu");
-ingredientsMenu.append(...ingredientsList);
-ustensilsMenu.append(...ustensilsList);
-appliancesMenu.append(...appliancesList);
-
 initDropdowns(recipes);
 /* FIN TEST */
 
@@ -29,4 +17,11 @@ initDropdowns(recipes);
 Mettre à jour les dropdown
   utiliser la fct 'showFilteredDropdownList'
 
+SAvoir qu'un tag est ajouté:
+  passer une cb à la fct qui ajoute les tag
+  executer la cb quand un tag est ajouté
+  La cb execute l'update des recherhces
+
+SAvoir qu'un tag est retiré:
+  idem mais la CB est passé à la tagfactory
     */

@@ -32,5 +32,3 @@ const addCloseTagListener = (node) => {
 };
 export { tagFactory };
 //TODO: refactor
-//TODO: Ajouter la disparition du tag quand l'img est cliquée.
-//TODO: Adapté la couleur du tag via une classe a ajouter
