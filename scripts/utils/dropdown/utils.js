@@ -24,6 +24,7 @@ const closeMenu = (menuToClose) => {
   menuToClose.setAttribute("data-open", "false");
 };
 
+/* Show items in the given dropdown list and filtered */
 const showFilteredDropdownList = (recipes, type, filter) => {
   const dropdownModel = dropdownsFactory(recipes);
   const elementsList = dropdownModel.getDropdownListDOM(type, filter);
@@ -38,4 +39,5 @@ const showFilteredDropdownList = (recipes, type, filter) => {
   elementsMenu.innerHTML = "";
   elementsMenu.append(...elementsList);
 };
+
 export { toggleMenuOpening, showFilteredDropdownList };

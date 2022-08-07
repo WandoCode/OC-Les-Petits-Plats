@@ -19,11 +19,12 @@ initDropdowns(recipes);
 /* FIN TEST */
 
 /* Quand main searchbar input change ou quand un tag est ajouté
+      Récupérer l'input de la searchbar
       Récupérer les tags choisis
       Rechercher les recettes correspondantes
       Les retourner
-      Afficher les cartes recettes
-      Mettre à jour les dropdowns 
+      Afficher les cartes recettes a partir des recettes retournées
+      Mettre à jour les dropdowns a partir des recettes retournées
       
 Mettre à jour les dropdown
   utiliser la fct 'showFilteredDropdownList'
