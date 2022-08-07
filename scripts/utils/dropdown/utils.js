@@ -3,7 +3,9 @@ const dropdownMenus = document.querySelectorAll(".dropdown-menu");
 /* Toggle opening of the menu */
 const toggleMenuOpening = (menu) => {
   const menuIsOpen = menu.getAttribute("data-open");
-  if (menuIsOpen === "true") closeMenu(menu);
+  const menuIsExpanded = menu.classList.contains("dropdown-menu--expanded");
+  if (menuIsExpanded) openMenu(menu); // Expanded menu is always open
+  else if (menuIsOpen === "true") closeMenu(menu);
   else openMenu(menu);
 };
 
