@@ -1,5 +1,4 @@
-import { toggleMenuOpening } from "./utils.js";
-import { dropdownsFactory } from "../../factories/dropdown.js";
+import { toggleMenuOpening, showFilteredDropdownList } from "./utils.js";
 const dropdownInputs = document.querySelectorAll(".dropdown-menu__input");
 
 const handleDropdownInputs = (recipes) => {
@@ -20,32 +19,8 @@ const handleDropdownInputs = (recipes) => {
       }
       /* Handle elements displayed in dropdown list */
       if (menuIsOpen) {
-        const dropdownModel = dropdownsFactory(recipes);
-        const ingredientsList = dropdownModel.getDropdownListDOM(
-          "ingredients",
-          value
-        );
-        const ustensilsList = dropdownModel.getDropdownListDOM(
-          "ustensils",
-          value
-        );
-        const appliancesList = dropdownModel.getDropdownListDOM(
-          "appliances",
-          value
-        );
-
-        const ingredientsMenu = document.getElementById("ingredient-menu");
-        const ustensilsMenu = document.getElementById("ustensil-menu");
-        const appliancesMenu = document.getElementById("appareil-menu");
-
-        ingredientsMenu.innerHTML = "";
-        ingredientsMenu.append(...ingredientsList);
-
-        ustensilsMenu.innerHTML = "";
-        ustensilsMenu.append(...ustensilsList);
-
-        appliancesMenu.innerHTML = "";
-        appliancesMenu.append(...appliancesList);
+        const inputID = e.target.id;
+        showFilteredDropdownList(recipes, inputID, value);
       }
     });
   });

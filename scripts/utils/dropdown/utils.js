@@ -1,3 +1,5 @@
+import { dropdownsFactory } from "../../factories/dropdown.js";
+
 const dropdownMenus = document.querySelectorAll(".dropdown-menu");
 
 /* Toggle opening of the menu */
@@ -22,4 +24,18 @@ const closeMenu = (menuToClose) => {
   menuToClose.setAttribute("data-open", "false");
 };
 
-export { toggleMenuOpening };
+const showFilteredDropdownList = (recipes, type, filter) => {
+  const dropdownModel = dropdownsFactory(recipes);
+  const elementsList = dropdownModel.getDropdownListDOM(type, filter);
+
+  const elementsMenuChoices = {
+    ingredients: document.getElementById("ingredient-menu"),
+    ustensils: document.getElementById("ustensil-menu"),
+    appliances: document.getElementById("appareil-menu"),
+  };
+
+  const elementsMenu = elementsMenuChoices[type];
+  elementsMenu.innerHTML = "";
+  elementsMenu.append(...elementsList);
+};
+export { toggleMenuOpening, showFilteredDropdownList };

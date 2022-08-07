@@ -17,3 +17,15 @@ appliancesMenu.append(...appliancesList);
 
 initDropdowns(recipes);
 /* FIN TEST */
+
+/* Quand main searchbar input change ou quand un tag est ajouté
+      Récupérer les tags choisis
+      Rechercher les recettes correspondantes
+      Les retourner
+      Afficher les cartes recettes
+      Mettre à jour les dropdowns 
+      
+Mettre à jour les dropdown
+  utiliser la fct 'showFilteredDropdownList'
+
+    */
