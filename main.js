@@ -1,8 +1,12 @@
 import { initDropdowns } from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
+import { searchFactory } from "./scripts/factories/mainSearch.js";
 /* TEST */
 
 initDropdowns(recipes);
+const searchModel = searchFactory(recipes);
+const rep = searchModel.filterRecipes(["coco"]);
+console.log(rep);
 /* FIN TEST */
 
 /* Quand main searchbar input change ou quand un tag est ajouté
