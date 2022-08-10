@@ -48,10 +48,12 @@ const searchFactory = (recipes) => {
           const filter = formatedFiltersArray[k];
           if (item.includes(filter)) {
             leftFilters.pop(filter);
-            foundRecipes.push(recipe);
           }
         }
-        if (leftFilters.length === 0) break;
+        if (leftFilters.length === 0) {
+          foundRecipes.push(recipe);
+          break;
+        }
       }
     }
 
