@@ -5,7 +5,7 @@ import { searchFactory } from "./scripts/factories/mainSearch.js";
 initDropdowns(recipes);
 /* TEST */
 const searchModel = searchFactory(recipes);
-searchModel.filterRecipes(["omate", "salad"]);
+console.log(searchModel.filterRecipes(["poisson", "tomate"]));
 /* FIN TEST */
 
 /* Quand main searchbar input change ou quand un tag est ajouté
