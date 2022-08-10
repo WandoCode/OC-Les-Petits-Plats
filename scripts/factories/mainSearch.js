@@ -29,17 +29,19 @@ const searchFactory = (recipes) => {
     return formatedArray;
   };
 
-  /* Return an array of recipes. Each recipe have all the filter found in it  */
+  /* Return an array of recipes. Each recipe have all the filters found in it  */
   const filterRecipes = (filtersArray) => {
     const foundRecipes = [];
+    const formatedFiltersArray = formatArrayToLowerCase(filtersArray);
     // Parcours les recettes une a une
     for (let i = 0, n = recipes.length; i < n; i++) {
       const recipe = recipes[i];
       //Construit un tableau de valeurs dans lesquels chercher les filtres
       const searchArray = getSearchItemsArray(recipe);
-      const formatedFiltersArray = formatArrayToLowerCase(filtersArray);
+
+      // Tableaux des filtres restant à trouver dans la recette pour l'ajouter aux recettes filtrées
       const leftFilters = [...formatedFiltersArray];
-      // Pour chaque valeur du tableau, verifie si un filtre s'y trouve
+      // Pour chaque valeur du tableau search, verifie si un filtre s'y trouve
       for (let j = 0, q = searchArray.length; j < q; j++) {
         const item = searchArray[j];
         // Compare chaque element de filterArray avec l'item
@@ -47,7 +49,7 @@ const searchFactory = (recipes) => {
         for (let k = 0; k < formatedFiltersArray.length; k++) {
           const filter = formatedFiltersArray[k];
           if (item.includes(filter)) {
-            leftFilters.pop(filter);
+            leftFilters.splice(k, 1);
           }
         }
         if (leftFilters.length === 0) {
@@ -56,7 +58,6 @@ const searchFactory = (recipes) => {
         }
       }
     }
-
     return foundRecipes;
   };
 
@@ -64,3 +65,4 @@ const searchFactory = (recipes) => {
 };
 
 export { searchFactory };
+//TODO: refactor
