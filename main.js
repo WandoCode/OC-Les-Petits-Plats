@@ -1,4 +1,3 @@
-import { dropdownsFactory } from "./scripts/factories/dropdown.js";
 import { initDropdowns } from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
 /* TEST */

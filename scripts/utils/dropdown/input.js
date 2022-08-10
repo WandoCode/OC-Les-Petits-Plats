@@ -25,5 +25,6 @@ const handleDropdownInputs = (recipes) => {
     });
   });
 };
-
+// TODO: La limitation des 3 lettres est pour la recherche principale uniquement? Vérifier dans la documentation
+//
 export { handleDropdownInputs };
