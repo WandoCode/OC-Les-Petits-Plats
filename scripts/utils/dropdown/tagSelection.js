@@ -1,7 +1,7 @@
 import { tagFactory } from "../../factories/tag.js";
 
 const itemsContainers = document.querySelectorAll(".item-container");
-
+/* Add tag to tags section whrn user click in menu dropdown */
 const handleTagSelectionInMenu = () => {
   itemsContainers.forEach((itemsContainer) => {
     itemsContainer.addEventListener("click", (e) => {

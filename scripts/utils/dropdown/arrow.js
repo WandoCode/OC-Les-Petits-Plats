@@ -1,29 +1,25 @@
-import { toggleMenuOpening } from "./utils.js";
+import { toggleMenuOpening, toggleMenuExpand } from "./utils.js";
 
+/* DOM nodes */
 const dropdownsArrows = document.querySelectorAll(".dropdown-menu__icon");
-const dropdownMenus = document.querySelectorAll(".dropdown-menu");
 
+/* Functions */
 /* Handle click on dropdown menu arrow */
 const handleDropdownArrow = () => {
   dropdownsArrows.forEach((dropdownArrow) => {
-    dropdownArrow.addEventListener("click", (e) => {
-      const dropdownMenuClicked = e.target.parentNode;
-
-      /* On click: open+expands menu or close+reduce menu */
-      toggleMenuExpand(dropdownMenuClicked);
-      toggleMenuOpening(dropdownMenuClicked);
-    });
+    arrowClicksHandler(dropdownArrow);
   });
 };
 
-/* Toggle expands of the menu */
-const toggleMenuExpand = (menuToExpand) => {
-  // Reduce all menu expect the one clicked
-  dropdownMenus.forEach((menu) => {
-    if (menu !== menuToExpand) menu.classList.remove("dropdown-menu--expanded");
-  });
+/* Listen clicks on a given dropdown arrow  */
+const arrowClicksHandler = (dropdownArrow) => {
+  dropdownArrow.addEventListener("click", (e) => {
+    const dropdownMenuClicked = e.target.parentNode;
 
-  menuToExpand.classList.toggle("dropdown-menu--expanded");
+    // On click: open+expands menu or close+reduce menu
+    toggleMenuExpand(dropdownMenuClicked);
+    toggleMenuOpening(dropdownMenuClicked);
+  });
 };
 
 export { handleDropdownArrow };

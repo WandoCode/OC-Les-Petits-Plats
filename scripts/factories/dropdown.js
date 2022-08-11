@@ -1,7 +1,7 @@
 /* Return arrays with ingredients present in the recipes */
 /* 'recipes' is an array */
 const dropdownsFactory = (recipes) => {
-  const getIngredientsArray = (filter) => {
+  const getIngredientsArray = () => {
     let ingredientsSet = new Set();
 
     recipes.forEach((recipe) => {
@@ -9,10 +9,7 @@ const dropdownsFactory = (recipes) => {
 
       ingredients.forEach((ingredient) => {
         const item = ingredient.ingredient.toLowerCase();
-
-        // Apply string filtering
-        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-        if (addItem) ingredientsSet.add(item);
+        ingredientsSet.add(item);
       });
     });
 
@@ -20,33 +17,26 @@ const dropdownsFactory = (recipes) => {
   };
 
   /* Return arrays with appliances present in the recipes */
-  const getAppliancesArray = (filter) => {
+  const getAppliancesArray = () => {
     let appliancesSet = new Set();
 
     recipes.forEach((recipe) => {
       const item = recipe.appliance.toLowerCase();
-
-      // Apply string filtering
-      const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-      if (addItem) appliancesSet.add(item);
+      appliancesSet.add(item);
     });
 
     return Array.from(appliancesSet);
   };
 
   /* Return arrays with ustensils present in the recipes */
-  const getUstensilsArray = (filter) => {
+  const getUstensilsArray = () => {
     let ustensilsSet = new Set();
 
     recipes.forEach((recipe) => {
       const ustensils = recipe.ustensils;
-
       ustensils.forEach((ustensil) => {
         const item = ustensil.toLowerCase();
-
-        // Apply string filtering
-        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-        if (addItem) ustensilsSet.add(item);
+        ustensilsSet.add(item);
       });
     });
 
@@ -56,12 +46,12 @@ const dropdownsFactory = (recipes) => {
   /* Return list element to fill dropdown menus. 
   'type': the focused menu
   'filter': optional, a string to increase filtering  */
-  const getDropdownListDOM = (type, filter) => {
+  const getDropdownListDOM = (type) => {
     let elementsArray;
 
-    if (type === "ingredients") elementsArray = getIngredientsArray(filter);
-    if (type === "ustensils") elementsArray = getUstensilsArray(filter);
-    if (type === "appliances") elementsArray = getAppliancesArray(filter);
+    if (type === "ingredients") elementsArray = getIngredientsArray();
+    if (type === "ustensils") elementsArray = getUstensilsArray();
+    if (type === "appliances") elementsArray = getAppliancesArray();
 
     const elementsList = [];
 
