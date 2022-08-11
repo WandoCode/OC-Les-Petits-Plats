@@ -5,7 +5,7 @@ import { searchFactory } from "./scripts/factories/mainSearch.js";
 
 initDropdowns(recipes);
 const searchModel = searchFactory(recipes);
-const rep = searchModel.filterRecipes(["poisson", "tomate"]);
+const rep = searchModel.filterRecipes(["chocolat"]);
 console.log(rep);
 /* FIN TEST */
 
