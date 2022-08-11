@@ -49,11 +49,19 @@ const searchFactory = (recipes) => {
         for (let k = 0; k < formatedFiltersArray.length; k++) {
           const filter = formatedFiltersArray[k];
           if (item.includes(filter)) {
-            leftFilters.splice(k, 1);
+            const itemIndexInLeftFilters = leftFilters.findIndex((el) => {
+              return el === filter;
+            });
+            if (itemIndexInLeftFilters !== -1) {
+              leftFilters.splice(itemIndexInLeftFilters, 1);
+              if (leftFilters.length === 0) {
+                foundRecipes.push(recipe);
+                break;
+              }
+            }
           }
         }
         if (leftFilters.length === 0) {
-          foundRecipes.push(recipe);
           break;
         }
       }
