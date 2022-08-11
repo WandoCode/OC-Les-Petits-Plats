@@ -1,6 +1,7 @@
 import { toggleMenuOpening, showFilteredDropdownList } from "./utils.js";
 const dropdownInputs = document.querySelectorAll(".dropdown-menu__input");
 
+/* Handle menus dropdown when user write in the input */
 const handleDropdownInputs = (recipes) => {
   dropdownInputs.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
@@ -10,10 +11,7 @@ const handleDropdownInputs = (recipes) => {
       const menuIsExpanded = menu.classList.contains("dropdown-menu--expanded");
       /*  Handle the opening of the menu */
       if (!menuIsExpanded) {
-        if (value.length >= 3 && menuIsOpen !== "true") {
-          toggleMenuOpening(menu);
-        }
-        if (value.length < 3 && menuIsOpen === "true") {
+        if (menuIsOpen !== "true") {
           toggleMenuOpening(menu);
         }
       }
@@ -25,6 +23,5 @@ const handleDropdownInputs = (recipes) => {
     });
   });
 };
-// TODO: La limitation des 3 lettres est pour la recherche principale uniquement? Vérifier dans la documentation
-//
+
 export { handleDropdownInputs };

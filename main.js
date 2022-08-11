@@ -1,12 +1,19 @@
-import { initDropdowns } from "./scripts/utils/dropdown/main.js";
+import {
+  initDropdowns,
+  updateDropdowns,
+} from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
 import { searchFactory } from "./scripts/factories/mainSearch.js";
+import { recipeFactory } from "./scripts/factories/recipes.js";
 
 const searchInput = document.querySelector("#search");
 
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.trim();
   if (value.length < 3) return;
+  //TODO: completer le if pour reinitialiser tout
+  //=>Afficher le message de depart pour dire que aucun recette dispo
+  //==>Reinitialiser les menu dropdown
 
   //Collect filters: tags + searchinput
   //=>Gets tags
@@ -29,8 +36,17 @@ searchInput.addEventListener("input", (e) => {
   const searchModel = searchFactory(recipes);
   const foundRecipes = searchModel.filterRecipes(filtersArray);
 
-  console.log(foundRecipes);
+  //Display recipes
+  const recipesSection = document.querySelector(".recipes");
+  recipesSection.innerHTML = "";
+  foundRecipes.forEach((recipe) => {
+    const recipeModel = recipeFactory(recipe);
+    const recipeCardDOM = recipeModel.getRecipeCardDOM();
+    recipesSection.append(recipeCardDOM);
+  });
+
   //Update dropdown with new recipes array
+  updateDropdowns(foundRecipes);
 });
 /* TEST */
 
