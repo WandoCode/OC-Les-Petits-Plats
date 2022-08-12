@@ -12,6 +12,7 @@ const dropdownsFactory = (recipes) => {
     createUstensilsArray();
   };
 
+  /* Create an array with ingredients present in the recipes */
   const createIngredientsArray = () => {
     let ingredientsSet = new Set();
 
@@ -27,7 +28,7 @@ const dropdownsFactory = (recipes) => {
     ingredientsArray = Array.from(ingredientsSet);
   };
 
-  /* Return arrays with appliances present in the recipes */
+  /* Create an array with appliances present in the recipes */
   const createAppliancesArray = () => {
     let appliancesSet = new Set();
 
@@ -39,12 +40,13 @@ const dropdownsFactory = (recipes) => {
     appliancesArray = Array.from(appliancesSet);
   };
 
-  /* Return arrays with ustensils present in the recipes */
+  /* Create an array with ustensils present in the recipes */
   const createUstensilsArray = () => {
     let ustensilsSet = new Set();
 
     recipes.forEach((recipe) => {
       const ustensils = recipe.ustensils;
+
       ustensils.forEach((ustensil) => {
         const item = ustensil.toLowerCase();
         ustensilsSet.add(item);
@@ -63,9 +65,7 @@ const dropdownsFactory = (recipes) => {
     return filteredTagsArray;
   };
 
-  /* Return list element to fill dropdown menus. 
-  'type': the focused menu
-  'filter': optional, a string to increase filtering  */
+  /* Return list element (dom nodes) to fill dropdown menus. */
   const getDropdownListDOM = (type, filter) => {
     let elementsArray;
 
