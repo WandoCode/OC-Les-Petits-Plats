@@ -6,7 +6,7 @@ const dropdownInputs = document.querySelectorAll(".dropdown-menu__input");
 
 /* Functions */
 /* Handle menus dropdown when user write in the input */
-const handleDropdownInputs = (recipes) => {
+const handleDropdownInputs = (dropDownModel) => {
   dropdownInputs.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       const menu = e.target.parentNode;
@@ -21,7 +21,7 @@ const handleDropdownInputs = (recipes) => {
       /* Handle elements displayed in dropdown list */
       if (menuIsOpen) {
         const inputID = e.target.id;
-        showFilteredDropdownList(recipes, inputID, value);
+        showFilteredDropdownList(dropDownModel, inputID, value);
       }
     });
   });

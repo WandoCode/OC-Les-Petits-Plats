@@ -1,9 +1,9 @@
 import {
   initDropdowns,
-  updateDropdowns,
+  updateDropdown,
 } from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
-import { searchFactory } from "./scripts/factories/mainSearch.js";
+import { searchRecipesFactory } from "./script2/factory/searchRecipes.js";
 import { recipeFactory } from "./scripts/factories/recipes.js";
 
 const searchInput = document.querySelector("#search");
@@ -33,7 +33,7 @@ searchInput.addEventListener("input", (e) => {
 
   //Make a search with mainSearch factory
   //=> Gets an array of recipes
-  const searchModel = searchFactory(recipes);
+  const searchModel = searchRecipesFactory(recipes);
   const foundRecipes = searchModel.filterRecipes(filtersArray);
 
   //Display recipes
@@ -44,35 +44,35 @@ searchInput.addEventListener("input", (e) => {
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
     recipesSection.append(recipeCardDOM);
   });
-
-  //Update dropdown with new recipes array
-  updateDropdowns(foundRecipes);
+  updateDropdown(foundRecipes);
 });
-/* TEST */
 
-const main = () => {
-  initDropdowns(recipes);
-};
+initDropdowns(recipes);
+// /* TEST */
 
-main();
-/* FIN TEST */
+// const main = () => {
+//   initDropdowns(recipes);
+// };
 
-/* Quand main searchbar input change ou quand un tag est ajouté
-      Récupérer l'input de la searchbar
-      Récupérer les tags choisis
-      Rechercher les recettes correspondantes
-      Les retourner
-      Afficher les cartes recettes a partir des recettes retournées
-      Mettre à jour les dropdowns a partir des recettes retournées
-      
-Mettre à jour les dropdown
-  utiliser la fct 'showFilteredDropdownList'
+// main();
+// /* FIN TEST */
 
-SAvoir qu'un tag est ajouté:
-  passer une cb à la fct qui ajoute les tag
-  executer la cb quand un tag est ajouté
-  La cb execute l'update des recherhces
+// /* Quand main searchbar input change ou quand un tag est ajouté
+//       Récupérer l'input de la searchbar
+//       Récupérer les tags choisis
+//       Rechercher les recettes correspondantes
+//       Les retourner
+//       Afficher les cartes recettes a partir des recettes retournées
+//       Mettre à jour les dropdowns a partir des recettes retournées
 
-SAvoir qu'un tag est retiré:
-  idem mais la CB est passé à la tagfactory
-    */
+// Mettre à jour les dropdown
+//   utiliser la fct 'showFilteredDropdownList'
+
+// SAvoir qu'un tag est ajouté:
+//   passer une cb à la fct qui ajoute les tag
+//   executer la cb quand un tag est ajouté
+//   La cb execute l'update des recherhces
+
+// SAvoir qu'un tag est retiré:
+//   idem mais la CB est passé à la tagfactory
+//     */

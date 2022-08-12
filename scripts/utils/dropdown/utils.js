@@ -35,8 +35,7 @@ const toggleMenuExpand = (menuToExpand) => {
 };
 
 /* Show items in the given dropdown list and filtered */
-const showFilteredDropdownList = (recipes, type, filter) => {
-  const dropdownModel = dropdownsFactory(recipes);
+const showFilteredDropdownList = (dropdownModel, type, filter) => {
   const elementsList = dropdownModel.getDropdownListDOM(type, filter);
 
   const elementsMenuChoices = {
@@ -51,10 +50,10 @@ const showFilteredDropdownList = (recipes, type, filter) => {
 };
 
 /* Show dropdowns for each existing menus */
-const showAllFilteredDropdownLists = (recipes) => {
-  showFilteredDropdownList(recipes, "ingredients", "");
-  showFilteredDropdownList(recipes, "appliances", "");
-  showFilteredDropdownList(recipes, "ustensils", "");
+const showAllFilteredDropdownLists = (dropdownModel) => {
+  showFilteredDropdownList(dropdownModel, "ingredients", "");
+  showFilteredDropdownList(dropdownModel, "appliances", "");
+  showFilteredDropdownList(dropdownModel, "ustensils", "");
 };
 
 export {
