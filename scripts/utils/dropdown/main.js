@@ -2,7 +2,7 @@ import { handleDropdownArrow } from "./arrow.js";
 import { handleDropdownInputs } from "./input.js";
 import { handleTagSelectionInMenu } from "./tagSelection.js";
 import { showAllFilteredDropdownLists } from "./utils.js";
-import { dropdownsFactory } from "../../../script2/factory/dropdown.js";
+import { dropdownsFactory } from "../../factories/dropdown.js";
 /* Functions */
 /* Initialize dropdown menus logic */
 const initDropdowns = (recipes) => {

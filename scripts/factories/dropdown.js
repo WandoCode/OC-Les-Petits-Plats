@@ -1,7 +1,18 @@
 /* Return arrays with ingredients present in the recipes */
 /* 'recipes' is an array */
 const dropdownsFactory = (recipes) => {
-  const getIngredientsArray = (filter) => {
+  let ingredientsArray = [];
+  let ustensilsArray = [];
+  let appliancesArray = [];
+
+  /* Fill tags arrays using recipes */
+  const createTagsArray = () => {
+    createIngredientsArray();
+    createAppliancesArray();
+    createUstensilsArray();
+  };
+
+  const createIngredientsArray = () => {
     let ingredientsSet = new Set();
 
     recipes.forEach((recipe) => {
@@ -9,45 +20,47 @@ const dropdownsFactory = (recipes) => {
 
       ingredients.forEach((ingredient) => {
         const item = ingredient.ingredient.toLowerCase();
-
+        ingredientsSet.add(item);
         // Apply string filtering
-        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-        if (addItem) ingredientsSet.add(item);
       });
     });
-
-    return Array.from(ingredientsSet);
+    ingredientsArray = Array.from(ingredientsSet);
   };
 
   /* Return arrays with appliances present in the recipes */
-  const getAppliancesArray = (filter) => {
+  const createAppliancesArray = () => {
     let appliancesSet = new Set();
 
     recipes.forEach((recipe) => {
       const item = recipe.appliance.toLowerCase();
-      // Apply string filtering
-      const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-      if (addItem) appliancesSet.add(item);
+      appliancesSet.add(item);
     });
 
-    return Array.from(appliancesSet);
+    appliancesArray = Array.from(appliancesSet);
   };
 
   /* Return arrays with ustensils present in the recipes */
-  const getUstensilsArray = (filter) => {
+  const createUstensilsArray = () => {
     let ustensilsSet = new Set();
 
     recipes.forEach((recipe) => {
       const ustensils = recipe.ustensils;
       ustensils.forEach((ustensil) => {
         const item = ustensil.toLowerCase();
-        // Apply string filtering
-        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-        if (addItem) ustensilsSet.add(item);
+        ustensilsSet.add(item);
       });
     });
 
-    return Array.from(ustensilsSet);
+    ustensilsArray = Array.from(ustensilsSet);
+  };
+
+  /* Filter the given array of tag with a string */
+  const getFilteredTags = (filterString, tagArray) => {
+    const filteredTagsArray = tagArray.filter((item) => {
+      return item.includes(filterString);
+    });
+
+    return filteredTagsArray;
   };
 
   /* Return list element to fill dropdown menus. 
@@ -56,9 +69,12 @@ const dropdownsFactory = (recipes) => {
   const getDropdownListDOM = (type, filter) => {
     let elementsArray;
 
-    if (type === "ingredients") elementsArray = getIngredientsArray(filter);
-    if (type === "ustensils") elementsArray = getUstensilsArray(filter);
-    if (type === "appliances") elementsArray = getAppliancesArray(filter);
+    if (type === "ingredients") elementsArray = ingredientsArray;
+
+    if (type === "ustensils") elementsArray = ustensilsArray;
+    if (type === "appliances") elementsArray = appliancesArray;
+
+    if (filter) elementsArray = getFilteredTags(filter, elementsArray);
 
     const elementsList = [];
 
@@ -71,7 +87,7 @@ const dropdownsFactory = (recipes) => {
     return elementsList;
   };
 
-  return { getDropdownListDOM };
+  return { getDropdownListDOM, createTagsArray };
 };
 
 export { dropdownsFactory };

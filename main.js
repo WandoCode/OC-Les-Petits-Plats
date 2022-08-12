@@ -3,7 +3,7 @@ import {
   updateDropdown,
 } from "./scripts/utils/dropdown/main.js";
 import { recipes } from "./datas/recipes.js";
-import { searchRecipesFactory } from "./script2/factory/searchRecipes.js";
+import { searchRecipesFactory } from "./scripts/factories/searchRecipes.js";
 import { recipeFactory } from "./scripts/factories/recipes.js";
 
 const searchInput = document.querySelector("#search");
