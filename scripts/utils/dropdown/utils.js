@@ -11,6 +11,12 @@ const toggleMenuOpening = (menu) => {
   else openMenu(menu);
 };
 
+/* Close all menus */
+const closeAllMenu = () => {
+  dropdownMenus.forEach((menu) => {
+    closeMenu(menu);
+  });
+};
 /* Makes the given menu the only one opened */
 const openMenu = (menuToOpen) => {
   dropdownMenus.forEach((menu) => {
@@ -31,7 +37,7 @@ const toggleMenuExpand = (menuToExpand) => {
     if (menu !== menuToExpand) menu.classList.remove("dropdown-menu--expanded");
   });
 
-  menuToExpand.classList.toggle("dropdown-menu--expanded");
+  if (menuToExpand) menuToExpand.classList.toggle("dropdown-menu--expanded");
 };
 
 /* Show items in the given dropdown menu */
@@ -61,4 +67,5 @@ export {
   toggleMenuExpand,
   showFilteredDropdownList,
   showAllFilteredDropdownLists,
+  closeAllMenu,
 };
