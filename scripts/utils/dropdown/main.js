@@ -3,27 +3,37 @@ import { handleDropdownInputs } from "./input.js";
 import { handleTagSelectionInMenu } from "./tagSelection.js";
 import { showAllFilteredDropdownLists } from "./utils.js";
 import { dropdownsFactory } from "../../factories/dropdown.js";
+
 /* Functions */
 /* Initialize dropdown menus logic */
 const initDropdowns = (recipes) => {
+  // Arrow click handler
+  handleDropdownArrow();
+
+  // Dropdown menu content click handler
+  handleTagSelectionInMenu();
+
+  // Create the model for dropdown content with the given recipes
   const dropdownModel = dropdownsFactory(recipes);
   dropdownModel.createTagsArray();
 
-  // Add tags to dropdown
+  // Add content to dropdown menus
   showAllFilteredDropdownLists(dropdownModel);
 
+  // Dropdown menus input handler
   handleDropdownInputs(dropdownModel);
-  handleTagSelectionInMenu();
-  handleDropdownArrow();
 };
 
+/* Handle the change of recipes */
 const updateDropdown = (recipes) => {
+  // Create the model for dropdown content with the given recipes
   const dropdownModel = dropdownsFactory(recipes);
   dropdownModel.createTagsArray();
 
-  // Add tags to dropdown
+  // Add content to dropdown menus
   showAllFilteredDropdownLists(dropdownModel);
 
+  // Dropdown menus input handler
   handleDropdownInputs(dropdownModel);
 
   //TODO: Reset la valeur de l'input dans le dropdown
