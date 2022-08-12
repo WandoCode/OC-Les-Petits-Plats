@@ -1,23 +1,29 @@
 import { tagFactory } from "../../factories/tag.js";
 
+/* DOM nodes */
 const itemsContainers = document.querySelectorAll(".item-container");
-/* Add tag to tags section whrn user click in menu dropdown */
+
+/* Add tag to tags section when user click in menu dropdown */
 const handleTagSelectionInMenu = () => {
   itemsContainers.forEach((itemsContainer) => {
     itemsContainer.addEventListener("click", (e) => {
+      // Select only tag element from dropdown menu
       if (e.target.tagName === "LI") {
         const value = e.target.innerText;
-        const tagColorClasses = Array.from(e.target.parentNode.classList);
-        const tagColorClass = tagColorClasses.find((item) => {
+        // Retrieve the color class of parent the give it to displayed tag
+        const parentClasses = Array.from(e.target.parentNode.classList);
+        const tagColorClass = parentClasses.find((item) => {
           return item.includes("color");
         });
+
+        // Add the tag to screen if possible
         handleAddTag(value, tagColorClass);
       }
     });
   });
 };
 
-/* Check if the tag can be added to tag field */
+/* Add tag if the tag can be added to tags section */
 const handleAddTag = (value, tagColorClass) => {
   const tags = document.querySelectorAll(".tag");
   const currentTagsValues = Array.from(tags).map((tag) => {
@@ -25,11 +31,16 @@ const handleAddTag = (value, tagColorClass) => {
   });
 
   if (!currentTagsValues.includes(value)) {
-    const tagsContainer = document.querySelector(".tags");
-    const tagModel = tagFactory(value, tagColorClass);
-    const tagNode = tagModel.createTagDOM();
-    tagsContainer.append(tagNode);
+    addTag(value, tagColorClass);
   }
+};
+
+/* Add tag */
+const addTag = (value, tagColorClass) => {
+  const tagsContainer = document.querySelector(".tags");
+  const tagModel = tagFactory(value, tagColorClass);
+  const tagNode = tagModel.createTagDOM();
+  tagsContainer.append(tagNode);
 };
 
 export { handleTagSelectionInMenu };

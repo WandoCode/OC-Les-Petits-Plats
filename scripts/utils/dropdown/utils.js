@@ -1,17 +1,17 @@
-import { dropdownsFactory } from "../../factories/dropdown.js";
-
+/* DOM nodes */
 const dropdownMenus = document.querySelectorAll(".dropdown-menu");
 
 /* Toggle opening of the menu */
 const toggleMenuOpening = (menu) => {
   const menuIsOpen = menu.getAttribute("data-open");
   const menuIsExpanded = menu.classList.contains("dropdown-menu--expanded");
+
   if (menuIsExpanded) openMenu(menu); // Expanded menu is always open
   else if (menuIsOpen === "true") closeMenu(menu);
   else openMenu(menu);
 };
 
-/* Make the given menu the only one opened */
+/* Makes the given menu the only one opened */
 const openMenu = (menuToOpen) => {
   dropdownMenus.forEach((menu) => {
     if (menu === menuToOpen) menu.setAttribute("data-open", "true");
@@ -34,7 +34,7 @@ const toggleMenuExpand = (menuToExpand) => {
   menuToExpand.classList.toggle("dropdown-menu--expanded");
 };
 
-/* Show items in the given dropdown list and filtered */
+/* Show items in the given dropdown menu */
 const showFilteredDropdownList = (dropdownModel, type, filter) => {
   const elementsList = dropdownModel.getDropdownListDOM(type, filter);
 
@@ -49,7 +49,7 @@ const showFilteredDropdownList = (dropdownModel, type, filter) => {
   elementsMenu.append(...elementsList);
 };
 
-/* Show dropdowns for each existing menus */
+/* Shows dropdowns for each existing menus */
 const showAllFilteredDropdownLists = (dropdownModel) => {
   showFilteredDropdownList(dropdownModel, "ingredients", "");
   showFilteredDropdownList(dropdownModel, "appliances", "");
