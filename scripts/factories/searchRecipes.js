@@ -1,12 +1,8 @@
-//Search into recipes to return some of them
-//Generate DOM card form recipes
+/* Handle recipes search logique */
 const searchRecipesFactory = (recipes) => {
   let lastFoundRecipes = [...recipes];
 
-  const getFoundRecipes = () => {
-    return lastFoundRecipes;
-  };
-  /* Return an array of lower case string with all ingredient in the given recipe */
+  /* Return an array of lower case string with all ingredients in the given recipe */
   const getRecipeIngredientArray = (recipe) => {
     const recipeIngredients = recipe.ingredients;
     const ingredientsArray = [];
@@ -36,31 +32,39 @@ const searchRecipesFactory = (recipes) => {
     return formatedArray;
   };
 
-  /* Return an array of recipes. Each recipe have all the filters found in it  */
+  /* Return an array of filtered recipes.*/
   const filterRecipes = (filtersArray) => {
     const foundRecipes = [];
+
+    // Prepare filters
     const formatedFiltersArray = formatArrayToLowerCase(filtersArray);
-    // Parcours les recettes une a une
+
+    // Iterate throught every recipes
     for (let i = 0, n = lastFoundRecipes.length; i < n; i++) {
       const recipe = lastFoundRecipes[i];
-      //Construit un tableau de valeurs dans lesquels chercher les filtres
+
+      // Build an array with all the elements to compare with filters
       const searchArray = getSearchItemsArray(recipe);
 
-      // Tableaux des filtres restant à trouver dans la recette pour l'ajouter aux recettes filtrées
+      // Array of filter not yet found in the current recipe
       const leftFilters = [...formatedFiltersArray];
-      // Pour chaque valeur du tableau search, verifie si un filtre s'y trouve
+
+      // Look into the search array if every filter is present
       for (let j = 0, q = searchArray.length; j < q; j++) {
         const item = searchArray[j];
-        // Compare chaque element de filterArray avec l'item
-        // S'il le contient, le filtre est retirer du tableau
+        // For the current search element, look if the filter is present
         for (let k = 0; k < formatedFiltersArray.length; k++) {
           const filter = formatedFiltersArray[k];
           if (item.includes(filter)) {
             const itemIndexInLeftFilters = leftFilters.findIndex((el) => {
               return el === filter;
             });
+
+            // If filter present: removes it from the array of filter for the current recipe
             if (itemIndexInLeftFilters !== -1) {
               leftFilters.splice(itemIndexInLeftFilters, 1);
+
+              // When all filter has been found in the current recipe, keep it and go to the next filter (and the next recipe)
               if (leftFilters.length === 0) {
                 foundRecipes.push(recipe);
                 break;
@@ -68,16 +72,20 @@ const searchRecipesFactory = (recipes) => {
             }
           }
         }
+        // All filters has been found in the current recipe, got to the next one
         if (leftFilters.length === 0) {
           break;
         }
       }
     }
+
+    // Keep found recipes in memory
     lastFoundRecipes = [...foundRecipes];
+
     return lastFoundRecipes;
   };
 
-  return { filterRecipes, getFoundRecipes };
+  return { filterRecipes };
 };
 
 export { searchRecipesFactory };

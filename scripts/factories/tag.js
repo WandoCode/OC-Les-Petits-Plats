@@ -1,4 +1,5 @@
 const tagFactory = (value, tagClass) => {
+  /* Create node of a tag */
   const createTagDOM = () => {
     const container = document.createElement("div");
     container.classList.add("tag");
@@ -21,14 +22,14 @@ const tagFactory = (value, tagClass) => {
     return container;
   };
 
+  const addCloseTagListener = (node) => {
+    node.addEventListener("click", (e) => {
+      const tagContainer = e.target.parentNode;
+      tagContainer.remove();
+    });
+  };
+
   return { createTagDOM };
 };
 
-const addCloseTagListener = (node) => {
-  node.addEventListener("click", (e) => {
-    const tagContainer = e.target.parentNode;
-    tagContainer.remove();
-  });
-};
 export { tagFactory };
-//TODO: refactor
