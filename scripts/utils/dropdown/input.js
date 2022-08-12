@@ -22,15 +22,7 @@ const handleDropdownInputs = (recipes) => {
       if (menuIsOpen) {
         const inputID = e.target.id;
         showFilteredDropdownList(recipes, inputID, value);
-        // recuperes les string dans le menu.
-        // Filtre avec le code ci dessous
-        //Genere le code
-        // Apply string filtering
-        const addItem = filter ? item.includes(filter.toLowerCase()) : true;
-        if (addItem) ingredientsSet.add(item);
       }
-      //TODO: Ici: récupréré les tags possibles dans la dropdows list (ce qui sont présents sans l'input du dropdown et les filtrer avec l'input du user. Pas besoin de repasser par la recherche complete dans l'ensemble des recettes avec juste la 'value' en plus comme filtre)
-      // TODO: retirer le 3eme argument de showFilteredDropdownList qui sera inutile
     });
   });
 };

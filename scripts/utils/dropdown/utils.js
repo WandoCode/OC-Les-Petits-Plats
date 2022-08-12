@@ -24,6 +24,16 @@ const closeMenu = (menuToClose) => {
   menuToClose.setAttribute("data-open", "false");
 };
 
+/* Toggle expands of the menu */
+const toggleMenuExpand = (menuToExpand) => {
+  // Reduce all menu expect the one clicked
+  dropdownMenus.forEach((menu) => {
+    if (menu !== menuToExpand) menu.classList.remove("dropdown-menu--expanded");
+  });
+
+  menuToExpand.classList.toggle("dropdown-menu--expanded");
+};
+
 /* Show items in the given dropdown list and filtered */
 const showFilteredDropdownList = (recipes, type, filter) => {
   const dropdownModel = dropdownsFactory(recipes);
@@ -40,4 +50,16 @@ const showFilteredDropdownList = (recipes, type, filter) => {
   elementsMenu.append(...elementsList);
 };
 
-export { toggleMenuOpening, showFilteredDropdownList };
+/* Show dropdowns for each existing menus */
+const showAllFilteredDropdownLists = (recipes) => {
+  showFilteredDropdownList(recipes, "ingredients", "");
+  showFilteredDropdownList(recipes, "appliances", "");
+  showFilteredDropdownList(recipes, "ustensils", "");
+};
+
+export {
+  toggleMenuOpening,
+  toggleMenuExpand,
+  showFilteredDropdownList,
+  showAllFilteredDropdownLists,
+};
