@@ -18,28 +18,30 @@ const initSearch = () => {
   });
 };
 
+/* Run a search with current values and tags */
 const triggerSearch = (value) => {
-  if (value.length === 0) {
-    setEmptyResults();
-  }
-  if (value.length < 3) return;
-  console.log(value);
-  /* Collects all filters */
   //Collects tags
   const allTagText = document.querySelectorAll(".tag__text");
   const tagsDOMArray = Array.from(allTagText);
   const tagsArray = tagsDOMArray.map((tagDOM) => {
     return tagDOM.innerText;
   });
-  console.log(tagsArray);
+
   // Collects main search input
-  const unfilteredInputsArray = value.split(" ");
-  const inputsArray = unfilteredInputsArray.filter((item) => {
-    // "" could be present into the initial array. It's removed here
-    return item.length > 0;
-  });
+  let inputsArray = [];
+  if (value.length >= 3) {
+    const unfilteredInputsArray = value.split(" ");
+    inputsArray = unfilteredInputsArray.filter((item) => {
+      // "" could be present into the initial array. It's removed here
+      return item.length > 0;
+    });
+  }
 
   const filtersArray = [...tagsArray, ...inputsArray];
+  if (filtersArray.length === 0) {
+    setEmptyResults();
+    return;
+  }
 
   //Make the search
   const searchModel = searchRecipesFactory(recipes);
@@ -61,10 +63,6 @@ const triggerSearch = (value) => {
   // Update dropdown menus
   updateDropdown(foundRecipes);
 };
-
-/* Trigger a search when a tag is added */
-
-/* TODO: Trigger a search when a tag is removed */
 
 /* Display a message on screen to tell that no recipe has been found */
 const showNoRecipesFound = () => {
