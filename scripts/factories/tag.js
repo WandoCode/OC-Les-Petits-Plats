@@ -1,4 +1,4 @@
-const tagFactory = (value, tagClass) => {
+const tagFactory = (value, tagClass, cbTriggerSearch) => {
   /* Create node of a tag */
   const createTagDOM = () => {
     const container = document.createElement("div");
@@ -22,14 +22,21 @@ const tagFactory = (value, tagClass) => {
     return container;
   };
 
+  const triggerSearch = () => {
+    const searchInput = document.querySelector("#search");
+    const currentSearchValue = searchInput.value;
+    cbTriggerSearch(currentSearchValue);
+  };
+
   const addCloseTagListener = (node) => {
     node.addEventListener("click", (e) => {
       const tagContainer = e.target.parentNode;
       tagContainer.remove();
+      triggerSearch();
     });
   };
 
-  return { createTagDOM };
+  return { createTagDOM, triggerSearch };
 };
 
 export { tagFactory };

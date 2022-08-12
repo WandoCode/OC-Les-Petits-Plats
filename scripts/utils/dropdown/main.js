@@ -6,12 +6,12 @@ import { dropdownsFactory } from "../../factories/dropdown.js";
 
 /* Functions */
 /* Initialize dropdown menus logic */
-const initDropdowns = (recipes) => {
+const initDropdowns = (recipes, triggerSearchFct) => {
   // Arrow click handler
   handleDropdownArrow();
 
   // Dropdown menu content click handler
-  handleTagSelectionInMenu();
+  handleTagSelectionInMenu(triggerSearchFct);
 
   // Create the model for dropdown content with the given recipes
   const dropdownModel = dropdownsFactory(recipes);

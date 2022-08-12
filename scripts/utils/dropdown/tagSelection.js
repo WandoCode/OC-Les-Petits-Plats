@@ -4,7 +4,7 @@ import { tagFactory } from "../../factories/tag.js";
 const itemsContainers = document.querySelectorAll(".item-container");
 
 /* Add tag to tags section when user click in menu dropdown */
-const handleTagSelectionInMenu = () => {
+const handleTagSelectionInMenu = (cbTriggerSearch) => {
   itemsContainers.forEach((itemsContainer) => {
     itemsContainer.addEventListener("click", (e) => {
       // Select only tag element from dropdown menu
@@ -17,30 +17,33 @@ const handleTagSelectionInMenu = () => {
         });
 
         // Add the tag to screen if possible
-        handleAddTag(value, tagColorClass);
+        handleAddTag(value, tagColorClass, cbTriggerSearch);
       }
     });
   });
 };
 
 /* Add tag if the tag can be added to tags section */
-const handleAddTag = (value, tagColorClass) => {
+const handleAddTag = (value, tagColorClass, cbTriggerSearch) => {
   const tags = document.querySelectorAll(".tag");
   const currentTagsValues = Array.from(tags).map((tag) => {
     return tag.firstElementChild.innerText;
   });
 
   if (!currentTagsValues.includes(value)) {
-    addTag(value, tagColorClass);
+    addTag(value, tagColorClass, cbTriggerSearch);
   }
 };
 
 /* Add tag */
-const addTag = (value, tagColorClass) => {
+const addTag = (value, tagColorClass, cbTriggerSearch) => {
   const tagsContainer = document.querySelector(".tags");
-  const tagModel = tagFactory(value, tagColorClass);
+  const tagModel = tagFactory(value, tagColorClass, cbTriggerSearch);
   const tagNode = tagModel.createTagDOM();
+
   tagsContainer.append(tagNode);
+
+  tagModel.triggerSearch();
 };
 
 export { handleTagSelectionInMenu };
