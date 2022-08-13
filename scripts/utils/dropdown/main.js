@@ -1,5 +1,5 @@
 import { handleDropdownArrow } from './arrow.js'
-import { handleDropdownInputs } from './input.js'
+import { handleDropdownInputs, emptiesAllDropdownsInput } from './input.js'
 import { handleTagSelectionInMenu } from './tagSelection.js'
 import {
   showAllFilteredDropdownLists,
@@ -43,6 +43,9 @@ const initDropdowns = (recipes, triggerSearchFct) => {
       // Close all the menus
       toggleMenuExpand()
       closeAllMenu()
+
+      // Remove dropdown input value
+      emptiesAllDropdownsInput()
     }
   })
 }
