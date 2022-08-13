@@ -40,7 +40,7 @@ const initDropdowns = (recipes, triggerSearchFct) => {
       !e.target.classList.contains("dropdown-menu__icon") &&
       !e.target.classList.contains("item-container")
     ) {
-      //Close all the menus
+      // Close all the menus
       toggleMenuExpand();
       closeAllMenu();
     }
@@ -61,5 +61,5 @@ const updateDropdown = (recipes) => {
 };
 export { initDropdowns, updateDropdown };
 
-//TODO: Fermer+reduire les listes dropdown quand on click en dehors du menu (ou dans un autre menu)
-//TODO: Revoir le style des dropdown. Ajuster la scroll bar
+// TODO: Fermer+reduire les listes dropdown quand on click en dehors du menu (ou dans un autre menu)
+// TODO: Revoir le style des dropdown. Ajuster la scroll bar
