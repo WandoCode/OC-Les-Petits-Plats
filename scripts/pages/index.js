@@ -13,6 +13,8 @@ const initSearch = () => {
     const value = e.target.value.trim()
     triggerSearch(value)
   })
+
+  showNoRecipesFound()
 }
 
 /* Run a search with current values and tags */
@@ -87,7 +89,7 @@ const displayRecipes = (recipesToDisplay) => {
 const showNoRecipesFound = () => {
   const h2 = document.createElement('h2')
   h2.textContent =
-    'Pas de recettes correspondant à votre recherche! Essayer de taper "tarte" ou "oeuf"'
+    'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.'
 
   recipesSection.innerHTML = ''
   recipesSection.append(h2)
