@@ -1,15 +1,14 @@
-import { initDropdowns } from "./scripts/utils/dropdown/main.js";
-import { recipes } from "./datas/recipes.js";
-import { initSearch, triggerSearch } from "./scripts/pages/index.js";
+
+import { initDropdowns } from './scripts/utils/dropdown/main.js'
+import { recipes } from './datas/recipes.js'
+import { initSearch, triggerSearch } from './scripts/pages/index.js'
 
 const main = () => {
   // Initialize search logic
-  initSearch();
+  initSearch()
 
   // Initialize dropdown menus
-  initDropdowns(recipes, triggerSearch);
+  initDropdowns(recipes, triggerSearch)
+}
 
-  return;
-};
-
-main();
+main()
