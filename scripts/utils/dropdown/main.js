@@ -58,11 +58,7 @@ const updateDropdown = (recipes) => {
 
   // Add content to dropdown menus
   showAllFilteredDropdownLists(dropdownModel)
-
-  // Dropdown menus input handler
-  handleDropdownInputs(dropdownModel)
 }
 export { initDropdowns, updateDropdown }
 
-// TODO: Fermer+reduire les listes dropdown quand on click en dehors du menu (ou dans un autre menu)
 // TODO: Revoir le style des dropdown. Ajuster la scroll bar
