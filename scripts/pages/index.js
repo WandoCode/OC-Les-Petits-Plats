@@ -4,6 +4,8 @@ import { recipes } from '../../datas/recipes.js'
 import { mainSearchFactory } from '../factories/mainSearch.js'
 import { tagSearchFactory } from '../factories/tagSearch.js'
 
+const message = 'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.'
+
 /* DOM nodes */
 const searchInput = document.querySelector('#search')
 const recipesSection = document.querySelector('.recipes')
@@ -15,7 +17,7 @@ const initSearch = () => {
     triggerSearch(value)
   })
 
-  showNoRecipesFound()
+  showNoRecipesFound(message)
 }
 
 /* Run a search with current values and tags */
@@ -23,46 +25,40 @@ const triggerSearch = (value) => {
   let foundRecipes = []
 
   // Collects filters
-  const tagsArray = collectsTagsFilter()
-  const inputsArray = collectMainInputFilter(value)
+  const tagsArray = collectsTags()
+  const inputsArray = collectMainInput(value)
 
   if (inputsArray.length === 0) {
-    if (tagsArray.length === 0) {
-      setEmptyResults()
-      return
+    // Process search by tag only
+    if (tagsArray.length !== 0) {
+      foundRecipes = searchByTag(recipes, tagsArray)
     } else {
-      const tagSearchModel = tagSearchFactory(recipes)
-      foundRecipes = tagSearchModel.filterRecipes(tagsArray)
+      resetToEmptyResults(message)
+      return
     }
   }
 
-  // Process the search from user input
   if (inputsArray.length > 0) {
-    const searchModel = mainSearchFactory(recipes)
-    foundRecipes = searchModel.filterRecipes(inputsArray)
+    foundRecipes = searchByInput(recipes, inputsArray)
   }
 
-  // Process the search from tag
   if (tagsArray.length > 0) {
     const recipesToFilter = [...foundRecipes]
-    const tagSearchModel = tagSearchFactory(recipesToFilter)
-    foundRecipes = tagSearchModel.filterRecipes(tagsArray)
+    foundRecipes = searchByTag(recipesToFilter, tagsArray)
   }
 
   if (foundRecipes.length === 0) {
-    setEmptyResults()
+    resetToEmptyResults(message)
     return
   }
 
-  // Display recipes
   displayRecipes(foundRecipes)
 
-  // Update dropdown menus
   updateDropdown(foundRecipes)
 }
 
 /* Return an array with selected tags */
-const collectsTagsFilter = () => {
+const collectsTags = () => {
   const allTagText = document.querySelectorAll('.tag__text')
   const tagsDOMArray = Array.from(allTagText)
 
@@ -74,7 +70,7 @@ const collectsTagsFilter = () => {
 }
 
 /* Return an array with words from main search input field */
-const collectMainInputFilter = (value) => {
+const collectMainInput = (value) => {
   let inputsArray = []
   if (value.length >= 3) {
     const unfilteredInputsArray = value.split(' ')
@@ -88,7 +84,7 @@ const collectMainInputFilter = (value) => {
   return inputsArray
 }
 
-/* Display the given recipes at screen */
+/* Display the given recipes on screen */
 const displayRecipes = (recipesToDisplay) => {
   recipesSection.innerHTML = ''
   recipesToDisplay.forEach((recipe) => {
@@ -101,17 +97,30 @@ const displayRecipes = (recipesToDisplay) => {
 }
 
 /* Display a message on screen to tell that no recipe has been found */
-const showNoRecipesFound = () => {
+const showNoRecipesFound = (message) => {
   const h2 = document.createElement('h2')
-  h2.textContent =
-    'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.'
+  h2.textContent = message
 
   recipesSection.innerHTML = ''
   recipesSection.append(h2)
 }
 
-const setEmptyResults = () => {
-  showNoRecipesFound()
+/* Reset filter and screen to an empty result state */
+const resetToEmptyResults = (message) => {
+  showNoRecipesFound(message)
   updateDropdown(recipes)
 }
+
+/* Return an array of filtered recipes by the given array */
+const searchByTag = (recipesToFilter, tagsArray) => {
+  const tagSearchModel = tagSearchFactory(recipesToFilter)
+  return tagSearchModel.filterRecipes(tagsArray)
+}
+
+/* Return an array of filtered recipes by the given array */
+const searchByInput = (recipesToFilter, inputsArray) => {
+  const searchModel = mainSearchFactory(recipesToFilter)
+  return searchModel.filterRecipes(inputsArray)
+}
+
 export { initSearch, triggerSearch }
