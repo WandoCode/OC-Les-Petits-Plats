@@ -88,3 +88,4 @@ const tagSearchFactory = (recipes) => {
 }
 
 export { tagSearchFactory }
+// TODO: refactor avec mainSearch?

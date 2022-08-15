@@ -20,18 +20,22 @@ const initSearch = () => {
 
 /* Run a search with current values and tags */
 const triggerSearch = (value) => {
+  let foundRecipes = []
+
   // Collects filters
   const tagsArray = collectsTagsFilter()
   const inputsArray = collectMainInputFilter(value)
 
-  if (inputsArray.length === 0) {
+  if (inputsArray.length === 0 && tagsArray.length === 0) {
     setEmptyResults() // TODO: il faut pouvoir rechercher par tag si inputsArray.length === 0
     return
   }
 
   // Process the search from user input
-  const searchModel = mainSearchFactory(recipes)
-  const foundRecipes = searchModel.filterRecipes(inputsArray)
+  if (inputsArray.length > 0) {
+    const searchModel = mainSearchFactory(recipes)
+    foundRecipes = searchModel.filterRecipes(inputsArray)
+  }
 
   if (foundRecipes.length === 0) {
     setEmptyResults()
@@ -39,10 +43,10 @@ const triggerSearch = (value) => {
   }
 
   // Process the search from tag
-  // TODO: research by tag
   if (tagsArray.length > 0) {
-    const tagSearchModel = tagSearchFactory(foundRecipes)
-    const filteredRecipesByTag = tagSearchModel.filterRecipes(tagsArray)
+    const recipesToFilter = [...foundRecipes]
+    const tagSearchModel = tagSearchFactory(recipesToFilter)
+    foundRecipes = tagSearchModel.filterRecipes(tagsArray)
   }
 
   // Display recipes
