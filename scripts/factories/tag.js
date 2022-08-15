@@ -1,4 +1,4 @@
-const tagFactory = (value, tagClass, cbTriggerSearch) => {
+const tagFactory = (value, tagClass, dropdownModel, cbTriggerSearch) => {
   /* Create node of a tag */
   const createTagDOM = () => {
     const container = document.createElement('div')
@@ -25,7 +25,7 @@ const tagFactory = (value, tagClass, cbTriggerSearch) => {
   const triggerSearch = () => {
     const searchInput = document.querySelector('#search')
     const currentSearchValue = searchInput.value
-    cbTriggerSearch(currentSearchValue)
+    cbTriggerSearch(currentSearchValue, dropdownModel)
   }
 
   const addCloseTagListener = (node) => {

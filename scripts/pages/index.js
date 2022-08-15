@@ -12,30 +12,32 @@ const recipesSection = document.querySelector('.recipes')
 
 /* Main search input listener */
 const initSearch = (dropdownModel) => {
-  searchInput.addEventListener('input', (e) => {
-    const value = e.target.value.trim()
-    triggerSearch(value, dropdownModel)
-  })
-
   showNoRecipesFound(message)
+
+  searchInput.addEventListener('input', (e) => {
+    const inputValue = e.target.value.trim()
+    triggerSearch(inputValue, dropdownModel)
+  })
 }
 
 /* Run a search with current values and tags */
-const triggerSearch = (value, dropdownModel) => {
+const triggerSearch = (inputValue, dropdownModel) => {
+  const foundRecipes = searchHandler(inputValue)
+  displayRecipes(foundRecipes)
+  updateDropdown(dropdownModel, foundRecipes)
+}
+
+const searchHandler = (inputValue) => {
   let foundRecipes = []
 
   // Collects filters
   const tagsArray = collectsTags()
-  const inputsArray = collectMainInput(value)
+  const inputsArray = collectMainInput(inputValue)
 
   if (inputsArray.length === 0) {
     // Process search by tag only
     if (tagsArray.length !== 0) {
       foundRecipes = searchByTag(recipes, tagsArray)
-    } else {
-      dropdownModel.setRecipes(recipes)
-      resetToEmptyResults(message, dropdownModel)
-      return
     }
   }
 
@@ -48,17 +50,7 @@ const triggerSearch = (value, dropdownModel) => {
     foundRecipes = searchByTag(recipesToFilter, tagsArray)
   }
 
-  if (foundRecipes.length === 0) {
-    // TODO: (mentor) Si des filtres sont présents mais pas de recettes dispo: il faut ne rien mettre dans les dropdown menu? Ou on peut les remplir avec les tags de toutes les recettes existantes? (ce que j'ai fait)
-    dropdownModel.setRecipes(recipes)
-    resetToEmptyResults(message, dropdownModel)
-    return
-  }
-
-  displayRecipes(foundRecipes)
-
-  dropdownModel.setRecipes(foundRecipes)
-  updateDropdown(dropdownModel)
+  return foundRecipes
 }
 
 /* Return an array with selected tags */
@@ -91,6 +83,12 @@ const collectMainInput = (value) => {
 /* Display the given recipes on screen */
 const displayRecipes = (recipesToDisplay) => {
   recipesSection.innerHTML = ''
+
+  if (recipesToDisplay.length === 0) {
+    showNoRecipesFound(message)
+    return
+  }
+
   recipesToDisplay.forEach((recipe) => {
     const recipeModel = recipeFactory(recipe)
 
@@ -107,12 +105,6 @@ const showNoRecipesFound = (message) => {
 
   recipesSection.innerHTML = ''
   recipesSection.append(h2)
-}
-
-/* Reset filter and screen to an empty result state */
-const resetToEmptyResults = (message, dropdownModel) => {
-  showNoRecipesFound(message)
-  updateDropdown(dropdownModel)
 }
 
 /* Return an array of filtered recipes by the given array */

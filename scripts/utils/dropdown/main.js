@@ -16,7 +16,7 @@ const initDropdowns = (dropdownModel, triggerSearchFct) => {
   handleDropdownArrow()
 
   // Dropdown menu content click handler
-  handleTagSelectionInMenu(triggerSearchFct)
+  handleTagSelectionInMenu(dropdownModel, triggerSearchFct)
 
   dropdownModel.createTagsArray()
 
@@ -48,7 +48,8 @@ const initDropdowns = (dropdownModel, triggerSearchFct) => {
 }
 
 /* Handle the change of recipes */
-const updateDropdown = (dropdownModel) => {
+const updateDropdown = (dropdownModel, newRecipes) => {
+  dropdownModel.setRecipes(newRecipes)
   dropdownModel.createTagsArray()
 
   // Add content to dropdown menus
