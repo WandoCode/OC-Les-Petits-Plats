@@ -1,17 +1,8 @@
+import { formatArrayToLowerCase, getRecipeIngredientArray } from '../utils/factories/array.js'
+
 /* Handle recipes search logique */
 const mainSearchFactory = (recipes) => {
   let lastFoundRecipes = [...recipes]
-
-  /* Return an array of lower case string with all ingredients in the given recipe */
-  const getRecipeIngredientArray = (recipe) => {
-    const recipeIngredients = recipe.ingredients
-    const ingredientsArray = []
-    for (let i = 0, n = recipeIngredients.length; i < n; i++) {
-      const ingredient = recipeIngredients[i].ingredient
-      ingredientsArray.push(ingredient.toLowerCase())
-    }
-    return ingredientsArray
-  }
 
   /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
   const getSearchItemsArray = (recipe) => {
@@ -20,16 +11,6 @@ const mainSearchFactory = (recipes) => {
     const description = recipe.description
 
     return formatArrayToLowerCase([title, ...ingredients, description])
-  }
-
-  /* Return the array with every items in lower case */
-  const formatArrayToLowerCase = (dataArray) => {
-    const formatedArray = []
-    for (let i = 0, n = dataArray.length; i < n; i++) {
-      const item = dataArray[i]
-      formatedArray.push(item)
-    }
-    return formatedArray
   }
 
   /* Return an array of filtered recipes. */

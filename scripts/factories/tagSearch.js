@@ -1,19 +1,10 @@
+import { formatArrayToLowerCase, getRecipeIngredientArray } from '../utils/factories/array.js'
+
 /* Handle recipes search logique */
 const tagSearchFactory = (recipes) => {
   let lastFoundRecipes = [...recipes]
 
-  /* Return an array of lower case string with all ingredients in the given recipe */
-  const getRecipeIngredientArray = (recipe) => {
-    const recipeIngredients = recipe.ingredients
-    const ingredientsArray = []
-    for (let i = 0, n = recipeIngredients.length; i < n; i++) {
-      const ingredient = recipeIngredients[i].ingredient
-      ingredientsArray.push(ingredient)
-    }
-    return ingredientsArray
-  }
-
-  /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
+  /* Generate an array of lowercase strings from usentsils, ingredients and appliance recipe fields */
   const getSearchItemsArray = (recipe) => {
     const usentsils = [...recipe.ustensils]
     const ingredients = getRecipeIngredientArray(recipe)
@@ -22,22 +13,13 @@ const tagSearchFactory = (recipes) => {
     return formatArrayToLowerCase([...usentsils, ...ingredients, appliance])
   }
 
-  /* Return the array with every items in lower case */
-  const formatArrayToLowerCase = (dataArray) => {
-    const formatedArray = []
-    for (let i = 0, n = dataArray.length; i < n; i++) {
-      const item = dataArray[i]
-      formatedArray.push(item.toLowerCase())
-    }
-    return formatedArray
-  }
-
   /* Return an array of filtered recipes. */
   const filterRecipes = (filtersArray) => {
     const foundRecipes = []
 
     // Prepare filters
     const formatedFiltersArray = formatArrayToLowerCase(filtersArray)
+
     // Iterate throught every recipes
     for (let i = 0, n = lastFoundRecipes.length; i < n; i++) {
       const recipe = lastFoundRecipes[i]
