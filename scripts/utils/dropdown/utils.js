@@ -41,7 +41,7 @@ const toggleMenuExpand = (menuToExpand) => {
 }
 
 /* Show items in the given dropdown menu */
-const showFilteredDropdownList = (dropdownModel, type, filter) => {
+const addItemsToDropdownMenu = (dropdownModel, type, filter) => {
   const elementsList = dropdownModel.getDropdownListDOM(type, filter)
 
   const elementsMenuChoices = {
@@ -56,16 +56,16 @@ const showFilteredDropdownList = (dropdownModel, type, filter) => {
 }
 
 /* Shows dropdowns for each existing menus */
-const showAllFilteredDropdownLists = (dropdownModel) => {
-  showFilteredDropdownList(dropdownModel, 'ingredients', '')
-  showFilteredDropdownList(dropdownModel, 'appliances', '')
-  showFilteredDropdownList(dropdownModel, 'ustensils', '')
+const addItemsToAllDropdownMenus = (dropdownModel) => {
+  addItemsToDropdownMenu(dropdownModel, 'ingredients', '')
+  addItemsToDropdownMenu(dropdownModel, 'appliances', '')
+  addItemsToDropdownMenu(dropdownModel, 'ustensils', '')
 }
 
 export {
   toggleMenuOpening,
   toggleMenuExpand,
-  showFilteredDropdownList,
-  showAllFilteredDropdownLists,
+  addItemsToDropdownMenu,
+  addItemsToAllDropdownMenus,
   closeAllMenu
 }

@@ -2,28 +2,24 @@ import { handleDropdownArrow } from './arrow.js'
 import { handleDropdownInputs, emptiesAllDropdownsInput } from './input.js'
 import { handleTagSelectionInMenu } from './tagSelection.js'
 import {
-  showAllFilteredDropdownLists,
+  addItemsToAllDropdownMenus,
   toggleMenuExpand,
   closeAllMenu
 } from './utils.js'
 
+/* DOM nodes */
 const body = document.querySelector('body')
 
 /* Functions */
 /* Initialize dropdown menus logic */
 const initDropdowns = (dropdownModel, triggerSearchFct) => {
-  // Arrow click handler
   handleDropdownArrow()
 
   // Dropdown menu content click handler
   handleTagSelectionInMenu(dropdownModel, triggerSearchFct)
 
-  dropdownModel.createTagsArray()
+  addItemsToAllDropdownMenus(dropdownModel)
 
-  // Add content to dropdown menus
-  showAllFilteredDropdownLists(dropdownModel)
-
-  // Dropdown menus input handler
   handleDropdownInputs(dropdownModel)
 
   // Close menu when user clicks outside of a menu
@@ -37,11 +33,8 @@ const initDropdowns = (dropdownModel, triggerSearchFct) => {
       !e.target.classList.contains('dropdown-menu__icon') &&
       !e.target.classList.contains('item-container')
     ) {
-      // Close all the menus
       toggleMenuExpand()
       closeAllMenu()
-
-      // Remove dropdown input value
       emptiesAllDropdownsInput()
     }
   })
@@ -49,10 +42,11 @@ const initDropdowns = (dropdownModel, triggerSearchFct) => {
 
 /* Handle the change of recipes */
 const updateDropdown = (dropdownModel, newRecipes) => {
+  // Update dropdown model whith the new recipes
   dropdownModel.setRecipes(newRecipes)
   dropdownModel.createTagsArray()
 
-  // Add content to dropdown menus
-  showAllFilteredDropdownLists(dropdownModel)
+  // Update the dropdown lists diplsayed on screen
+  addItemsToAllDropdownMenus(dropdownModel)
 }
 export { initDropdowns, updateDropdown }

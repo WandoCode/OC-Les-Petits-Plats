@@ -17,14 +17,14 @@ const handleTagSelectionInMenu = (dropdownModel, cbTriggerSearch) => {
         })
 
         // Add the tag to screen if possible
-        handleAddTag(value, tagColorClass, dropdownModel, cbTriggerSearch)
+        addTagIfNotPresent(value, tagColorClass, dropdownModel, cbTriggerSearch)
       }
     })
   })
 }
 
 /* Add tag if the tag can be added to tags section */
-const handleAddTag = (value, tagColorClass, dropdownModel, cbTriggerSearch) => {
+const addTagIfNotPresent = (value, tagColorClass, dropdownModel, cbTriggerSearch) => {
   const tags = document.querySelectorAll('.tag')
   const currentTagsValues = Array.from(tags).map((tag) => {
     return tag.firstElementChild.innerText

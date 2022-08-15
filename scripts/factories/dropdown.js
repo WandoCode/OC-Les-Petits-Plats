@@ -70,12 +70,11 @@ const dropdownsFactory = () => {
     return filteredTagsArray
   }
 
-  /* Return list element (dom nodes) to fill dropdown menus. */
+  /* Return list of DOM element to fill dropdown menus. */
   const getDropdownListDOM = (type, filter) => {
     let elementsArray
 
     if (type === 'ingredients') elementsArray = ingredientsArray
-
     if (type === 'ustensils') elementsArray = ustensilsArray
     if (type === 'appliances') elementsArray = appliancesArray
 

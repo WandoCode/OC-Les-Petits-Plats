@@ -14,7 +14,7 @@ const tagSearchFactory = (recipes) => {
   }
 
   /* Return an array of filtered recipes. */
-  const filterRecipes = (filtersArray) => {
+  const getFilteredRecipes = (filtersArray) => {
     const foundRecipes = []
 
     // Prepare filters
@@ -66,7 +66,7 @@ const tagSearchFactory = (recipes) => {
     return lastFoundRecipes
   }
 
-  return { filterRecipes }
+  return { getFilteredRecipes }
 }
 
 export { tagSearchFactory }

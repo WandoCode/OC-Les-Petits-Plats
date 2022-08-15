@@ -1,4 +1,4 @@
-import { toggleMenuOpening, showFilteredDropdownList } from './utils.js'
+import { toggleMenuOpening, addItemsToDropdownMenu } from './utils.js'
 
 /* DOM nodes */
 const dropdownInputs = document.querySelectorAll('.dropdown-menu__input')
@@ -23,7 +23,7 @@ const handleDropdownInputs = (dropDownModel) => {
       /* Handle elements displayed in dropdown list */
       if (menuIsOpen) {
         const inputID = e.target.id
-        showFilteredDropdownList(dropDownModel, inputID, value)
+        addItemsToDropdownMenu(dropDownModel, inputID, value)
       }
     })
   })

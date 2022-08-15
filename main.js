@@ -6,6 +6,7 @@ import { initSearch, triggerSearch } from './scripts/pages/index.js'
 const main = () => {
   const dropdownModel = dropdownsFactory(recipes)
   dropdownModel.setRecipes(recipes)
+  dropdownModel.createTagsArray()
 
   // Initialize search logic
   initSearch(dropdownModel)

@@ -4,7 +4,7 @@ import { formatArrayToLowerCase, getRecipeIngredientArray } from '../utils/facto
 const mainSearchFactory = (recipes) => {
   let lastFoundRecipes = [...recipes]
 
-  /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
+  /* Generate an array strings from title, description and ingredients recipe fields */
   const getSearchItemsArray = (recipe) => {
     const title = recipe.name
     const ingredients = getRecipeIngredientArray(recipe)
@@ -14,7 +14,7 @@ const mainSearchFactory = (recipes) => {
   }
 
   /* Return an array of filtered recipes. */
-  const filterRecipes = (filtersArray) => {
+  const getFilteredRecipes = (filtersArray) => {
     const foundRecipes = []
 
     // Prepare filters
@@ -66,7 +66,7 @@ const mainSearchFactory = (recipes) => {
     return lastFoundRecipes
   }
 
-  return { filterRecipes }
+  return { getFilteredRecipes }
 }
 
 export { mainSearchFactory }
