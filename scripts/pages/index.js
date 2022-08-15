@@ -1,7 +1,8 @@
 import { recipeFactory } from '../factories/recipes.js'
 import { updateDropdown } from '../utils/dropdown/main.js'
 import { recipes } from '../../datas/recipes.js'
-import { searchRecipesFactory } from '../factories/searchRecipes.js'
+import { mainSearchFactory } from '../factories/mainSearch.js'
+import { tagSearchFactory } from '../factories/tagSearch.js'
 
 /* DOM nodes */
 const searchInput = document.querySelector('#search')
@@ -23,20 +24,25 @@ const triggerSearch = (value) => {
   const tagsArray = collectsTagsFilter()
   const inputsArray = collectMainInputFilter(value)
 
-  const filtersArray = [...tagsArray, ...inputsArray]
-
-  if (filtersArray.length === 0) {
-    setEmptyResults()
+  if (inputsArray.length === 0) {
+    setEmptyResults() // TODO: il faut pouvoir rechercher par tag si inputsArray.length === 0
     return
   }
 
-  // Process the search
-  const searchModel = searchRecipesFactory(recipes)
-  const foundRecipes = searchModel.filterRecipes(filtersArray)
+  // Process the search from user input
+  const searchModel = mainSearchFactory(recipes)
+  const foundRecipes = searchModel.filterRecipes(inputsArray)
 
   if (foundRecipes.length === 0) {
     setEmptyResults()
     return
+  }
+
+  // Process the search from tag
+  // TODO: research by tag
+  if (tagsArray.length > 0) {
+    const tagSearchModel = tagSearchFactory(foundRecipes)
+    const filteredRecipesByTag = tagSearchModel.filterRecipes(tagsArray)
   }
 
   // Display recipes

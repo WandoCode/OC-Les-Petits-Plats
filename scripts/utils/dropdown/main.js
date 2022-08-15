@@ -60,5 +60,3 @@ const updateDropdown = (recipes) => {
   showAllFilteredDropdownLists(dropdownModel)
 }
 export { initDropdowns, updateDropdown }
-
-// TODO: Revoir le style des dropdown. Ajuster la scroll bar

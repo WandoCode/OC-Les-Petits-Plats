@@ -1,5 +1,5 @@
 /* Handle recipes search logique */
-const searchRecipesFactory = (recipes) => {
+const tagSearchFactory = (recipes) => {
   let lastFoundRecipes = [...recipes]
 
   /* Return an array of lower case string with all ingredients in the given recipe */
@@ -15,11 +15,11 @@ const searchRecipesFactory = (recipes) => {
 
   /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
   const getSearchItemsArray = (recipe) => {
-    const title = recipe.name.toLowerCase()
+    const usentsils = formatArrayToLowerCase([...recipe.ustensils])
     const ingredients = getRecipeIngredientArray(recipe)
-    const description = recipe.description.toLowerCase()
+    const appliance = recipe.appliance.toLowerCase()
 
-    return [title, ...ingredients, description]
+    return [...usentsils, ...ingredients, appliance]
   }
 
   /* Return the array with every items in lower case */
@@ -38,7 +38,6 @@ const searchRecipesFactory = (recipes) => {
 
     // Prepare filters
     const formatedFiltersArray = formatArrayToLowerCase(filtersArray)
-
     // Iterate throught every recipes
     for (let i = 0, n = lastFoundRecipes.length; i < n; i++) {
       const recipe = lastFoundRecipes[i]
@@ -88,4 +87,4 @@ const searchRecipesFactory = (recipes) => {
   return { filterRecipes }
 }
 
-export { searchRecipesFactory }
+export { tagSearchFactory }
