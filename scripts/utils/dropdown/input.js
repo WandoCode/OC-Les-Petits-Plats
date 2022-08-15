@@ -13,7 +13,7 @@ const handleDropdownInputs = (dropDownModel) => {
       const menuIsOpen = menu.getAttribute('data-open')
       const menuIsExpanded = menu.classList.contains('dropdown-menu--expanded')
 
-      // Empty other dropdowns input if it's the 1st char
+      // Empties other dropdowns input if it's the 1st char
       if (value.length === 1) emptiesAllDropdownsInput(inputEl)
 
       /*  Handle the opening of the menu */

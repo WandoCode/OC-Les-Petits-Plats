@@ -1,9 +1,14 @@
 /* Return arrays with ingredients present in the recipes */
 /* 'recipes' is an array */
-const dropdownsFactory = (recipes) => {
+const dropdownsFactory = () => {
+  let recipes = []
   let ingredientsArray = []
   let ustensilsArray = []
   let appliancesArray = []
+
+  const setRecipes = (newRecipes) => {
+    recipes = newRecipes
+  }
 
   /* Fill tags arrays using recipes */
   const createTagsArray = () => {
@@ -87,7 +92,7 @@ const dropdownsFactory = (recipes) => {
     return elementsList
   }
 
-  return { getDropdownListDOM, createTagsArray }
+  return { getDropdownListDOM, createTagsArray, setRecipes }
 }
 
 export { dropdownsFactory }

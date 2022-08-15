@@ -11,17 +11,17 @@ const searchInput = document.querySelector('#search')
 const recipesSection = document.querySelector('.recipes')
 
 /* Main search input listener */
-const initSearch = () => {
+const initSearch = (dropdownModel) => {
   searchInput.addEventListener('input', (e) => {
     const value = e.target.value.trim()
-    triggerSearch(value)
+    triggerSearch(value, dropdownModel)
   })
 
   showNoRecipesFound(message)
 }
 
 /* Run a search with current values and tags */
-const triggerSearch = (value) => {
+const triggerSearch = (value, dropdownModel) => {
   let foundRecipes = []
 
   // Collects filters
@@ -33,7 +33,8 @@ const triggerSearch = (value) => {
     if (tagsArray.length !== 0) {
       foundRecipes = searchByTag(recipes, tagsArray)
     } else {
-      resetToEmptyResults(message)
+      dropdownModel.setRecipes(recipes)
+      resetToEmptyResults(message, dropdownModel)
       return
     }
   }
@@ -48,13 +49,16 @@ const triggerSearch = (value) => {
   }
 
   if (foundRecipes.length === 0) {
-    resetToEmptyResults(message)
+    // TODO: (mentor) Si des filtres sont présents mais pas de recettes dispo: il faut ne rien mettre dans les dropdown menu? Ou on peut les remplir avec les tags de toutes les recettes existantes? (ce que j'ai fait)
+    dropdownModel.setRecipes(recipes)
+    resetToEmptyResults(message, dropdownModel)
     return
   }
 
   displayRecipes(foundRecipes)
 
-  updateDropdown(foundRecipes)
+  dropdownModel.setRecipes(foundRecipes)
+  updateDropdown(dropdownModel)
 }
 
 /* Return an array with selected tags */
@@ -106,9 +110,9 @@ const showNoRecipesFound = (message) => {
 }
 
 /* Reset filter and screen to an empty result state */
-const resetToEmptyResults = (message) => {
+const resetToEmptyResults = (message, dropdownModel) => {
   showNoRecipesFound(message)
-  updateDropdown(recipes)
+  updateDropdown(dropdownModel)
 }
 
 /* Return an array of filtered recipes by the given array */

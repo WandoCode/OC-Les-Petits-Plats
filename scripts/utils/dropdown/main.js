@@ -6,21 +6,18 @@ import {
   toggleMenuExpand,
   closeAllMenu
 } from './utils.js'
-import { dropdownsFactory } from '../../factories/dropdown.js'
 
 const body = document.querySelector('body')
 
 /* Functions */
 /* Initialize dropdown menus logic */
-const initDropdowns = (recipes, triggerSearchFct) => {
+const initDropdowns = (dropdownModel, triggerSearchFct) => {
   // Arrow click handler
   handleDropdownArrow()
 
   // Dropdown menu content click handler
   handleTagSelectionInMenu(triggerSearchFct)
 
-  // Create the model for dropdown content with the given recipes
-  const dropdownModel = dropdownsFactory(recipes)
   dropdownModel.createTagsArray()
 
   // Add content to dropdown menus
@@ -51,9 +48,7 @@ const initDropdowns = (recipes, triggerSearchFct) => {
 }
 
 /* Handle the change of recipes */
-const updateDropdown = (recipes) => {
-  // Create the model for dropdown content with the given recipes
-  const dropdownModel = dropdownsFactory(recipes)
+const updateDropdown = (dropdownModel) => {
   dropdownModel.createTagsArray()
 
   // Add content to dropdown menus
