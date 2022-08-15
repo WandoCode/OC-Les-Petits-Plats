@@ -8,18 +8,18 @@ const tagSearchFactory = (recipes) => {
     const ingredientsArray = []
     for (let i = 0, n = recipeIngredients.length; i < n; i++) {
       const ingredient = recipeIngredients[i].ingredient
-      ingredientsArray.push(ingredient.toLowerCase())
+      ingredientsArray.push(ingredient)
     }
     return ingredientsArray
   }
 
   /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
   const getSearchItemsArray = (recipe) => {
-    const usentsils = formatArrayToLowerCase([...recipe.ustensils])
+    const usentsils = [...recipe.ustensils]
     const ingredients = getRecipeIngredientArray(recipe)
-    const appliance = recipe.appliance.toLowerCase()
+    const appliance = recipe.appliance
 
-    return [...usentsils, ...ingredients, appliance]
+    return formatArrayToLowerCase([...usentsils, ...ingredients, appliance])
   }
 
   /* Return the array with every items in lower case */
@@ -88,4 +88,4 @@ const tagSearchFactory = (recipes) => {
 }
 
 export { tagSearchFactory }
-// TODO: refactor avec mainSearch?
+// TODO: (mentor): OK de chercher dans les 3 champs pour chaque tag? Ou bien il faut chercher le tag dans son champ respectif uniquement?

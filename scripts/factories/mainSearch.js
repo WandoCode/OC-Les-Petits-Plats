@@ -15,11 +15,11 @@ const mainSearchFactory = (recipes) => {
 
   /* Generate an array of lowercase strings from title, description and ingredients recipe fields */
   const getSearchItemsArray = (recipe) => {
-    const title = recipe.name.toLowerCase()
+    const title = recipe.name
     const ingredients = getRecipeIngredientArray(recipe)
-    const description = recipe.description.toLowerCase()
+    const description = recipe.description
 
-    return [title, ...ingredients, description]
+    return formatArrayToLowerCase([title, ...ingredients, description])
   }
 
   /* Return the array with every items in lower case */
@@ -27,7 +27,7 @@ const mainSearchFactory = (recipes) => {
     const formatedArray = []
     for (let i = 0, n = dataArray.length; i < n; i++) {
       const item = dataArray[i]
-      formatedArray.push(item.toLowerCase())
+      formatedArray.push(item)
     }
     return formatedArray
   }
@@ -38,6 +38,7 @@ const mainSearchFactory = (recipes) => {
 
     // Prepare filters
     const formatedFiltersArray = formatArrayToLowerCase(filtersArray)
+
     // Iterate throught every recipes
     for (let i = 0, n = lastFoundRecipes.length; i < n; i++) {
       const recipe = lastFoundRecipes[i]
