@@ -55,13 +55,12 @@
 
 /* Bug flex box: ul n'adapte pas sa largeur avec flex wrap. Ajout du container pour contourner le bug */
 .item-container {
-  display: flex;
   flex-wrap: wrap;
   width: 100%;
   border-radius: 0 0 5px 5px;
 }
 
-.dropdown-menu[data-open="true"] .dropdown-menu__menu {
+.dropdown-menu[data-open='true'] .dropdown-menu__menu {
   display: flex;
 }
 
