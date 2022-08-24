@@ -4,7 +4,8 @@ import { recipes } from '../../datas/recipes.js'
 import { mainSearchFactory } from '../factories/mainSearch.js'
 import { tagSearchFactory } from '../factories/tagSearch.js'
 
-const message = 'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.'
+const message =
+  'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.'
 
 /* DOM nodes */
 const searchInput = document.querySelector('#search')
@@ -12,7 +13,7 @@ const recipesSection = document.querySelector('.recipes')
 
 /* Main search listener */
 const initSearch = (dropdownModel) => {
-  showNoRecipeFound(message)
+  updateScreen(recipes, dropdownModel)
 
   searchInput.addEventListener('input', (e) => {
     const inputValue = e.target.value.trim()
@@ -23,7 +24,7 @@ const initSearch = (dropdownModel) => {
 /* Run a search with current input values and tags */
 const triggerSearch = (inputValue, dropdownModel) => {
   const tagsArray = collectsTags()
-  const inputsArray = collectMainInput(inputValue)
+  const inputsArray = collectMainFilters(inputValue)
   const foundRecipes = searchRecipes(inputsArray, tagsArray)
 
   updateScreen(foundRecipes, dropdownModel)
@@ -32,10 +33,17 @@ const triggerSearch = (inputValue, dropdownModel) => {
 const searchRecipes = (inputsArray, tagsArray) => {
   let foundRecipes = []
 
+  // Search by tag only
   if (inputsArray.length === 0) {
-    // Search by tag only
     if (tagsArray.length !== 0) {
       foundRecipes = searchByTag(recipes, tagsArray)
+    }
+  }
+
+  // No search executed (not enought letters and no tag)
+  if (inputsArray.length === 0) {
+    if (tagsArray.length === 0) {
+      foundRecipes = recipes
     }
   }
 
@@ -64,17 +72,16 @@ const collectsTags = () => {
 }
 
 /* Return an array with words from main search input field */
-const collectMainInput = (value) => {
+const collectMainFilters = (value) => {
   let inputsArray = []
-  if (value.length >= 3) {
-    const unfilteredInputsArray = value.split(' ')
+  const unfilteredInputsArray = value.split(' ')
 
+  if (value.length >= 3) {
     inputsArray = unfilteredInputsArray.filter((item) => {
       // "" could be present into the initial array. It's removed here
       return item.length > 0
     })
   }
-
   return inputsArray
 }
 
@@ -95,7 +102,7 @@ const updateScreen = (foundRecipes, dropdownModel) => {
   recipesSection.innerHTML = ''
   if (foundRecipes.length === 0) {
     showNoRecipeFound(message)
-    updateDropdown(dropdownModel, recipes) // TODO (mentor). Ok de montrer les tags de l'ensembles des recettes dispo si aucune recette trouvée?
+    updateDropdown(dropdownModel, recipes)
     return
   }
 
