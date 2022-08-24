@@ -3,10 +3,12 @@
   width: 380px;
   background-color: var(--color-light-gray);
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .recipe__details {
   display: flex;
+  align-items: flex-start;
   font-size: 12px;
   padding: 0 20px;
 }
